@@ -50,8 +50,7 @@ cd cartao-medico-virtual
 ```
 
 Crie um ambiente virtual (opcional, mas recomendado):
-```
-bash
+```bash
 python -m venv venv
 ```
 
@@ -101,6 +100,7 @@ cartao-medico-virtual/
 └── venv/                     # Ambiente virtual (opcional)
 
 ## Funcionalidades Futuras
-Validação e mensagens de erro no formulário.
-Exportação do cartão médico virtual em formato PDF ou imagem.
+Inserção dos campos para dados pessoais, e melhoria das informções médicas.
+Frente e verso do cartão virtual.
 Autenticação e segurança para proteger as informações sensíveis do usuário.
+armazenamento dos dados em arquivo .BD
