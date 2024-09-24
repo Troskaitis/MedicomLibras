@@ -1,7 +1,8 @@
-Cartão Médico Virtual
+# Cartão Médico Virtual
+
 Esta aplicação web em Python permite o cadastro de informações médicas básicas de pacientes com deficiência auditiva ou oral e gera um cartão médico virtual, que pode ser usado para facilitar o atendimento médico dessas pessoas. O cartão contém informações como tipo sanguíneo, medicamentos controlados, histórico cirúrgico, doenças crônicas, e alergias, em um formato visual similar a um cartão de saúde.
 
-Estrutura do Projeto
+## Estrutura do Projeto
 A aplicação é desenvolvida com Flask e contém as seguintes funcionalidades:
 
 1. Formulário de Cadastro de Informações Médicas
@@ -39,49 +40,40 @@ Instalação
 Clone o repositório para sua máquina local:
 
 bash
-Copiar código
 git clone https://github.com/seu-usuario/cartao-medico-virtual.git
 Entre no diretório do projeto:
 
 bash
-Copiar código
 cd cartao-medico-virtual
 Crie um ambiente virtual (opcional, mas recomendado):
 
 bash
-Copiar código
 python -m venv venv
 Ative o ambiente virtual:
 
 No Windows:
 bash
-Copiar código
 venv\Scripts\activate
 No Linux/macOS:
 bash
-Copiar código
 source venv/bin/activate
 Instale as dependências:
 
 bash
-Copiar código
 pip install -r requirements.txt
 Executando a Aplicação
 Após instalar as dependências, inicie o servidor Flask:
 
 bash
-Copiar código
 flask run
 Acesse a aplicação no seu navegador pelo endereço:
 
 arduino
-Copiar código
 http://127.0.0.1:5000
 Estrutura de Diretórios
 A estrutura do projeto é organizada da seguinte forma:
 
 csharp
-Copiar código
 cartao-medico-virtual/
 │
 ├── app.py                   # Arquivo principal da aplicação Flask
