@@ -36,36 +36,48 @@ Como Rodar o Projeto
 Pré-requisitos
 Python 3.x instalado.
 Virtualenv (opcional, mas recomendado para isolar dependências).
-Instalação
+
+## Instalação
+
 Clone o repositório para sua máquina local:
-
-bash
+```bash
 git clone https://github.com/seu-usuario/cartao-medico-virtual.git
+```
+
 Entre no diretório do projeto:
-
-bash
+```bash
 cd cartao-medico-virtual
-Crie um ambiente virtual (opcional, mas recomendado):
+```
 
+Crie um ambiente virtual (opcional, mas recomendado):
+```
 bash
 python -m venv venv
+```
+
 Ative o ambiente virtual:
 
 No Windows:
-bash
+```bash
 venv\Scripts\activate
+```
 No Linux/macOS:
-bash
+```bash
 source venv/bin/activate
-Instale as dependências:
+```
+## Instale as dependências:
 
-bash
+```bash
 pip install -r requirements.txt
+```
+
 Executando a Aplicação
 Após instalar as dependências, inicie o servidor Flask:
 
-bash
+```bash
 flask run
+```
+
 Acesse a aplicação no seu navegador pelo endereço:
 
 arduino
@@ -87,12 +99,8 @@ cartao-medico-virtual/
 ├── README.md                 # Este arquivo README
 ├── requirements.txt          # Dependências da aplicação
 └── venv/                     # Ambiente virtual (opcional)
-Funcionalidades Futuras
+
+## Funcionalidades Futuras
 Validação e mensagens de erro no formulário.
 Exportação do cartão médico virtual em formato PDF ou imagem.
 Autenticação e segurança para proteger as informações sensíveis do usuário.
-Contribuições
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests para melhorar o projeto.
-
-Licença
-Este projeto está licenciado sob a MIT License.
