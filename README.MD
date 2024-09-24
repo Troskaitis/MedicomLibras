@@ -1,6 +1,6 @@
 # Cartão Médico Virtual
 
-Esta aplicação web em Python permite o cadastro de informações médicas básicas de pacientes com deficiência auditiva ou oral e gera um cartão médico virtual, que pode ser usado para facilitar o atendimento médico dessas pessoas. O cartão contém informações como tipo sanguíneo, medicamentos controlados, histórico cirúrgico, doenças crônicas, e alergias, em um formato visual similar a um cartão de saúde.
+Esta aplicação web em Python permite o cadastro de informações médicas básicas de pacientes com deficiência auditiva, ele gera um cartão médico virtual, que pode ser usado para facilitar o atendimento médico dessas pessoas. O cartão contém informações como tipo sanguíneo, medicamentos controlados, histórico cirúrgico, doenças crônicas, e alergias, em um formato visual similar a um cartão de saúde.
 
 ## Estrutura do Projeto
 A aplicação é desenvolvida com Flask e contém as seguintes funcionalidades:
