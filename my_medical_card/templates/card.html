@@ -9,6 +9,7 @@
         body {
             background-color: #f0f4f7;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -59,13 +60,29 @@
             margin-top: 10px;
             font-size: 0.95rem;
         }
+        #download-btn {
+            margin-top: 40px; /* Espaçamento entre o cartão e o botão */
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
         .card-title {
             color: #003366;
-        }  
+        }
     </style>
 </head>
 <body>
-    <div class="card-container">
+    <div class="card-container" id="card">
         <!-- Título do cartão -->
         <div class="card-title">Cartão Médico Virtual</div>
         
@@ -86,5 +103,30 @@
             <p><strong>Doença Crônica:</strong> {{ chronic_disease }}</p>
         </div>
     </div>
+
+    <!-- Botão para download -->
+    <div id="download-btn">
+        <button onclick="downloadCard()">Download</button>
+    </div>
+
+    <!-- Inclusão da biblioteca html2canvas -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
+
+    <script>
+        function downloadCard() {
+            const card = document.getElementById('card');
+            
+            html2canvas(card, {
+                scale: 3,  // Aumenta a escala da renderização para melhorar a qualidade da imagem
+                useCORS: true,  // Permite o uso de imagens de origem cruzada se necessário
+                backgroundColor: null  // Define o fundo como transparente ou deixe nulo para manter o gradiente
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'cartao-medico-virtual.png';
+                link.href = canvas.toDataURL('image/png', 1.0);  // Qualidade máxima da imagem
+                link.click();
+            });
+        }
+    </script>
 </body>
 </html>
