@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartão Médico Virtual</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f4f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card-container {
+            width: 650px;
+            height: 380px; 
+            border-radius: 15px;
+            background: linear-gradient(135deg, #003366 5%, #ffffff 25%);
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            color: #003366;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+        .card-title {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+        }
+        .company-name {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+        .name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 50px;
+        }
+        .info {
+            margin-top: 10px;
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #003366;
+        }
+        .details {
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+        .card-title {
+            color: #003366;
+        }  
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <!-- Título do cartão -->
+        <div class="card-title">Cartão Médico Virtual</div>
+        
+        <!-- Nome da empresa -->
+        <div class="company-name">Geap Saúde</div>
+
+        <!-- Informações médicas -->
+        <div class="name">{{ name }}</div>
+        <div class="info">
+            <div><strong>Tipo Sanguíneo:</strong> {{ blood_type }}</div>
+            <div><strong>Data de Nascimento:</strong> 01/02/1990</div>
+        </div>
+        <div class="details">
+            <p><strong>Remédio Controlado:</strong> {{ medication }}</p>
+            <p><strong>Cirurgias:</strong> {{ surgery }}</p>
+            <p><strong>Doenças na Família:</strong> {{ family_diseases }}</p>
+            <p><strong>Alergias:</strong> {{ allergies }}</p>
+            <p><strong>Doença Crônica:</strong> {{ chronic_disease }}</p>
+        </div>
+    </div>
+</body>
+</html>

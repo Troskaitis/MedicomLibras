@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Informações Médicas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Cadastro de Informações Médicas</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="POST" action="/">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.name.label(class="form-label") }}
+                        {{ form.name(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.blood_type.label(class="form-label") }}
+                        {{ form.blood_type(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.medication.label(class="form-label") }}
+                        {{ form.medication(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.surgery.label(class="form-label") }}
+                        {{ form.surgery(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.family_diseases.label(class="form-label") }}
+                        {{ form.family_diseases(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.allergies.label(class="form-label") }}
+                        {{ form.allergies(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.chronic_disease.label(class="form-label") }}
+                        {{ form.chronic_disease(class="form-control") }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Gerar Cartão</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
