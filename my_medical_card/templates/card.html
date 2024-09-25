@@ -111,7 +111,7 @@
 
         <div class="name">{{ name }}</div>
         <div class="info">
-            <div><strong>Tipo Sanguíneo:</strong> {{ blood_type }}</div>
+            <div><strong>Tipagem Sanguínea:</strong> {{ blood_type }}</div>
             <div><strong>Data de Nascimento:</strong> {{ birth_date }}</div>
         </div>
         <div class="details">
@@ -119,6 +119,7 @@
             <p><strong>RG:</strong> {{ rg }}</p>
             <p><strong>CPF:</strong> {{ cpf }}</p>
             <p><strong>Número do Cartão SUS:</strong> {{ sus_number }}</p>
+            <p><strong>CID:</strong> {{ cid }}</p>
         </div>
     </div>
 
@@ -128,11 +129,10 @@
         <div class="verso-title">Cartão Médico Virtual</div>
             <div class="DM">Dados Médicos</div>
         <div class="info"></div>
-        <!-- Informações médicas (removemos nome e tipo sanguíneo) -->
         <div class="details">
             <br>
             <p><strong>Remédio Controlado:</strong> {{ medication }}</p>
-            <p><strong>Cirurgias:</strong> {{ surgery }}</p>
+            <p><strong>Histórico de Cirurgias:</strong> {{ surgery }}</p>
             <p><strong>Doenças na Família:</strong> {{ family_diseases }}</p>
             <p><strong>Alergias:</strong> {{ allergies }}</p>
             <p><strong>Doença Crônica:</strong> {{ chronic_disease }}</p>
