@@ -1,0 +1,92 @@
+body {
+    background-color: #f0f4f7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.card-container {
+    width: 650px;
+    height: 350px; 
+    border-radius: 15px;
+    background: linear-gradient(135deg, #003366 2%, #ffffff 20%);
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: #003366;
+    font-family: Arial, sans-serif;
+    position: relative;
+    margin-bottom: 40px; 
+}
+.card-title {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+}
+.company-name {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+.name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 50px;
+}
+.info {
+    margin-top: 10px;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #003366;
+}
+.details {
+    margin-top: 10px;
+    font-size: 0.95rem;
+}
+#download-btn {
+    margin-top: 40px; 
+    text-align: center;
+}
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #0056b3;
+}
+.verso-title {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+}
+.card-title {
+    color: #003366;
+}
+.verso-title {
+    color: #003366;
+}
+.DM{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 50px;
+}
