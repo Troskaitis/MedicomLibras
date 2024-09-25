@@ -103,9 +103,7 @@ cartao-medico-virtual/
 
 │
 ├── README.md                 # Este arquivo README
-
 ├── requirements.txt          # Dependências da aplicação
-
 └── venv/                     # Ambiente virtual (opcional)
 
 ## Funcionalidades Futuras
