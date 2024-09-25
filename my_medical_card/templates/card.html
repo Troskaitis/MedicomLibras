@@ -19,7 +19,7 @@
             width: 650px;
             height: 380px; 
             border-radius: 15px;
-            background: linear-gradient(135deg, #003366 5%, #ffffff 25%);
+            background: linear-gradient(135deg, #003366 2%, #ffffff 20%);
             padding: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             color: #003366;
@@ -93,6 +93,11 @@
         .verso-title {
             color: #003366;
         }
+        .DM{
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 50px;
+        }
 
     </style>
 </head>
@@ -102,9 +107,6 @@
         <!-- Título do cartão -->
         <div class="card-title">Cartão Médico Virtual</div>
         
-        <!-- Nome da empresa -->
-        <div class="company-name">Geap Saúde</div>
-
         <!-- Informações da frente (dados pessoais) -->
 
         <div class="name">{{ name }}</div>
@@ -124,8 +126,7 @@
     <div class="card-container" id="card-back">
         <!-- Título do verso -->
         <div class="verso-title">Cartão Médico Virtual</div>
-            <br>
-            <br>
+            <div class="DM">Dados Médicos</div>
         <div class="info"></div>
         <!-- Informações médicas (removemos nome e tipo sanguíneo) -->
         <div class="details">
