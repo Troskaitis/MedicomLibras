@@ -25,6 +25,7 @@
             color: #003366;
             font-family: Arial, sans-serif;
             position: relative;
+            margin-bottom: 40px; /* Espaçamento entre os cartões e o botão */
         }
         .card-title {
             position: absolute;
@@ -76,26 +77,59 @@
         button:hover {
             background-color: #0056b3;
         }
+        .verso-title {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+        }
         .card-title {
             color: #003366;
         }
+        .verso-title {
+            color: #003366;
+        }
+
     </style>
 </head>
 <body>
-    <div class="card-container" id="card">
+    <!-- Frente do Cartão -->
+    <div class="card-container" id="card-front">
         <!-- Título do cartão -->
         <div class="card-title">Cartão Médico Virtual</div>
         
         <!-- Nome da empresa -->
         <div class="company-name">Geap Saúde</div>
 
-        <!-- Informações médicas -->
+        <!-- Informações da frente (dados pessoais) -->
+
         <div class="name">{{ name }}</div>
         <div class="info">
             <div><strong>Tipo Sanguíneo:</strong> {{ blood_type }}</div>
-            <div><strong>Data de Nascimento:</strong> 01/02/1990</div>
+            <div><strong>Data de Nascimento:</strong> {{ birth_date }}</div>
         </div>
         <div class="details">
+            <br>
+            <p><strong>RG:</strong> {{ rg }}</p>
+            <p><strong>CPF:</strong> {{ cpf }}</p>
+            <p><strong>Número do Cartão SUS:</strong> {{ sus_number }}</p>
+        </div>
+    </div>
+
+    <!-- Verso do Cartão -->
+    <div class="card-container" id="card-back">
+        <!-- Título do verso -->
+        <div class="verso-title">Cartão Médico Virtual</div>
+            <br>
+            <br>
+        <div class="info"></div>
+        <!-- Informações médicas (removemos nome e tipo sanguíneo) -->
+        <div class="details">
+            <br>
             <p><strong>Remédio Controlado:</strong> {{ medication }}</p>
             <p><strong>Cirurgias:</strong> {{ surgery }}</p>
             <p><strong>Doenças na Família:</strong> {{ family_diseases }}</p>
@@ -106,7 +140,7 @@
 
     <!-- Botão para download -->
     <div id="download-btn">
-        <button onclick="downloadCard()">Download</button>
+        <button onclick="downloadCard()">Baixar Cartão como Imagem</button>
     </div>
 
     <!-- Inclusão da biblioteca html2canvas -->
@@ -114,17 +148,32 @@
 
     <script>
         function downloadCard() {
-            const card = document.getElementById('card');
+            const cardFront = document.getElementById('card-front');
+            const cardBack = document.getElementById('card-back');
             
-            html2canvas(card, {
-                scale: 3,  // Aumenta a escala da renderização para melhorar a qualidade da imagem
-                useCORS: true,  // Permite o uso de imagens de origem cruzada se necessário
-                backgroundColor: null  // Define o fundo como transparente ou deixe nulo para manter o gradiente
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'cartao-medico-virtual.png';
-                link.href = canvas.toDataURL('image/png', 1.0);  // Qualidade máxima da imagem
-                link.click();
+            // Combinar frente e verso em uma única imagem
+            html2canvas(cardFront, { scale: 3, backgroundColor: null }).then(canvasFront => {
+                html2canvas(cardBack, { scale: 3, backgroundColor: null }).then(canvasBack => {
+                    
+                    // Criar um canvas maior para incluir frente e verso
+                    const combinedCanvas = document.createElement('canvas');
+                    combinedCanvas.width = canvasFront.width;
+                    combinedCanvas.height = canvasFront.height + canvasBack.height + 40; // 40px de espaço entre frente e verso
+                    
+                    const context = combinedCanvas.getContext('2d');
+                    context.fillStyle = "#f0f4f7"; // Cor de fundo semelhante à cor da página
+                    context.fillRect(0, 0, combinedCanvas.width, combinedCanvas.height);
+
+                    // Desenhar a frente e o verso no canvas combinado
+                    context.drawImage(canvasFront, 0, 0);
+                    context.drawImage(canvasBack, 0, canvasFront.height + 40); // 40px de espaço
+
+                    // Baixar o cartão como uma única imagem
+                    const link = document.createElement('a');
+                    link.download = 'cartao-medico-virtual.png';
+                    link.href = combinedCanvas.toDataURL('image/png', 1.0); // Qualidade máxima da imagem
+                    link.click();
+                });
             });
         }
     </script>
