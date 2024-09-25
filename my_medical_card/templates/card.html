@@ -15,6 +15,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 800px; /* Definindo um tamanho máximo para o cartão */
             display: inline-block; /* Exibir em linha para capturar ambos os lados */
+            position: relative; /* Para permitir o posicionamento da imagem */
         }
 
         .card-title, .verso-title {
@@ -47,12 +48,21 @@
         button:hover {
             background-color: #0056b3;
         }
+
+        .logo {
+            position: absolute;
+            top: 15px; /* Ajuste a posição vertical */
+            right: 15px; /* Ajuste a posição horizontal */
+            width: 40px; /* Ajuste o tamanho conforme necessário */
+            height: auto; /* Mantém a proporção da imagem */
+        }
     </style>
 </head>
 <body>
     <div id="card" style="display: flex; flex-direction: column; align-items: center;"> <!-- Contêiner para o cartão -->
         <!-- Frente do Cartão -->
         <div class="card-container" id="card-front">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo"> <!-- Imagem no canto superior direito -->
             <div class="card-title">Cartão Médico Virtual</div>
             <div class="name">{{ name }}</div>
             <br>
@@ -71,6 +81,7 @@
 
         <!-- Verso do Cartão -->
         <div class="card-container" id="card-back">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
             <div class="verso-title">Cartão Médico Virtual</div>
             <div class="DM">Dados Médicos</div>
             <div class="info"></div>
