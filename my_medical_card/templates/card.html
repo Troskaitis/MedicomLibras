@@ -4,179 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cartão Médico Virtual</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        body {
-            background-color: #f0f4f7;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
         .card-container {
-            width: 650px;
-            height: 380px; 
-            border-radius: 15px;
-            background: linear-gradient(135deg, #003366 2%, #ffffff 20%);
+            border: 1px solid #ccc;
+            border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            color: #003366;
-            font-family: Arial, sans-serif;
-            position: relative;
-            margin-bottom: 40px; /* Espaçamento entre os cartões e o botão */
+            margin: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px; /* Definindo um tamanho máximo para o cartão */
+            display: inline-block; /* Exibir em linha para capturar ambos os lados */
         }
-        .card-title {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.8rem;
+
+        .card-title, .verso-title {
+            font-size: 24px;
             font-weight: bold;
-            color: #ffffff;
             text-align: center;
+            margin-bottom: 20px;
         }
-        .company-name {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 1.2rem;
-            color: #ffffff;
+
+        .info, .details {
+            font-size: 16px;
+            line-height: 1.5;
         }
-        .name {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-top: 50px;
-        }
-        .info {
-            margin-top: 10px;
-            font-size: 1rem;
-            display: flex;
-            justify-content: space-between;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #003366;
-        }
-        .details {
-            margin-top: 10px;
-            font-size: 0.95rem;
-        }
+
         #download-btn {
-            margin-top: 40px; /* Espaçamento entre o cartão e o botão */
             text-align: center;
+            margin-top: 20px;
         }
+
         button {
             padding: 10px 20px;
-            font-size: 1rem;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
             background-color: #007bff;
             color: white;
-            border: none;
             border-radius: 5px;
-            cursor: pointer;
         }
+
         button:hover {
             background-color: #0056b3;
         }
-        .verso-title {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #ffffff;
-            text-align: center;
-        }
-        .card-title {
-            color: #003366;
-        }
-        .verso-title {
-            color: #003366;
-        }
-        .DM{
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-top: 50px;
-        }
-
     </style>
 </head>
 <body>
-    <!-- Frente do Cartão -->
-    <div class="card-container" id="card-front">
-        <!-- Título do cartão -->
-        <div class="card-title">Cartão Médico Virtual</div>
-        
-        <!-- Informações da frente (dados pessoais) -->
-
-        <div class="name">{{ name }}</div>
-        <div class="info">
-            <div><strong>Tipagem Sanguínea:</strong> {{ blood_type }}</div>
-            <div><strong>Data de Nascimento:</strong> {{ birth_date }}</div>
-        </div>
-        <div class="details">
+    <div id="card" style="display: flex; flex-direction: column; align-items: center;"> <!-- Contêiner para o cartão -->
+        <!-- Frente do Cartão -->
+        <div class="card-container" id="card-front">
+            <div class="card-title">Cartão Médico Virtual</div>
+            <div class="name">{{ name }}</div>
             <br>
-            <p><strong>RG:</strong> {{ rg }}</p>
-            <p><strong>CPF:</strong> {{ cpf }}</p>
-            <p><strong>Número do Cartão SUS:</strong> {{ sus_number }}</p>
-            <p><strong>CID:</strong> {{ cid }}</p>
+            <div class="info">
+                <div><strong>Tipagem Sanguínea:</strong> {{ blood_type }}</div>
+                <div><strong>Data de Nascimento:</strong> {{ birth_date }}</div>
+            </div>
+            <div class="details">
+                <br>
+                <p><strong>RG:</strong> {{ rg }}</p>
+                <p><strong>CPF:</strong> {{ cpf }}</p>
+                <p><strong>Número do Cartão SUS:</strong> {{ sus_number }}</p>
+                <p><strong>CID:</strong> {{ cid }}</p>
+            </div>
         </div>
-    </div>
 
-    <!-- Verso do Cartão -->
-    <div class="card-container" id="card-back">
-        <!-- Título do verso -->
-        <div class="verso-title">Cartão Médico Virtual</div>
+        <!-- Verso do Cartão -->
+        <div class="card-container" id="card-back">
+            <div class="verso-title">Cartão Médico Virtual</div>
             <div class="DM">Dados Médicos</div>
-        <div class="info"></div>
-        <div class="details">
-            <br>
-            <p><strong>Remédio Controlado:</strong> {{ medication }}</p>
-            <p><strong>Histórico de Cirurgias:</strong> {{ surgery }}</p>
-            <p><strong>Doenças na Família:</strong> {{ family_diseases }}</p>
-            <p><strong>Alergias:</strong> {{ allergies }}</p>
-            <p><strong>Doença Crônica:</strong> {{ chronic_disease }}</p>
+            <div class="info"></div>
+            <div class="details">
+                <br>
+                <p><strong>Remédio Controlado:</strong> {{ medication }}</p>
+                <p><strong>Histórico de Cirurgias:</strong> {{ surgery }}</p>
+                <p><strong>Doenças na Família:</strong> {{ family_diseases }}</p>
+                <p><strong>Alergias:</strong> {{ allergies }}</p>
+                <p><strong>Doença Crônica:</strong> {{ chronic_disease }}</p>
+            </div>
         </div>
     </div>
 
     <!-- Botão para download -->
     <div id="download-btn">
-        <button onclick="downloadCard()">Baixar Cartão como Imagem</button>
+        <button onclick="downloadCard()">Download</button>
     </div>
 
     <!-- Inclusão da biblioteca html2canvas -->
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
-
     <script>
         function downloadCard() {
-            const cardFront = document.getElementById('card-front');
-            const cardBack = document.getElementById('card-back');
-            
-            // Combinar frente e verso em uma única imagem
-            html2canvas(cardFront, { scale: 3, backgroundColor: null }).then(canvasFront => {
-                html2canvas(cardBack, { scale: 3, backgroundColor: null }).then(canvasBack => {
-                    
-                    // Criar um canvas maior para incluir frente e verso
-                    const combinedCanvas = document.createElement('canvas');
-                    combinedCanvas.width = canvasFront.width;
-                    combinedCanvas.height = canvasFront.height + canvasBack.height + 40; // 40px de espaço entre frente e verso
-                    
-                    const context = combinedCanvas.getContext('2d');
-                    context.fillStyle = "#f0f4f7"; // Cor de fundo semelhante à cor da página
-                    context.fillRect(0, 0, combinedCanvas.width, combinedCanvas.height);
-
-                    // Desenhar a frente e o verso no canvas combinado
-                    context.drawImage(canvasFront, 0, 0);
-                    context.drawImage(canvasBack, 0, canvasFront.height + 40); // 40px de espaço
-
-                    // Baixar o cartão como uma única imagem
-                    const link = document.createElement('a');
-                    link.download = 'cartao-medico-virtual.png';
-                    link.href = combinedCanvas.toDataURL('image/png', 1.0); // Qualidade máxima da imagem
-                    link.click();
-                });
+            html2canvas(document.querySelector("#card"), { // Captura o contêiner do cartão
+                scale: 2,  // Aumenta a escala do canvas para melhorar a qualidade
+                useCORS: true, // Habilita CORS para carregar imagens de domínios externos
+                backgroundColor: null // Para manter o fundo transparente se necessário
+            }).then(canvas => {
+                const a = document.createElement('a');
+                a.href = canvas.toDataURL('image/png', 1.0); // Qualidade máxima
+                a.download = 'cartao-medico.png';
+                a.click();
             });
         }
+    </script>
+
+    <!-- Script para adicionar arrastar o cartão -->
+    <script>
+        let isDragging = false;
+        let startX;
+        let scrollLeft;
+
+        const card = document.querySelector('.card-container');
+
+        card.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.pageX - card.offsetLeft;
+            scrollLeft = card.scrollLeft;
+            card.style.cursor = "grabbing";
+        });
+
+        card.addEventListener('mouseleave', () => {
+            isDragging = false;
+            card.style.cursor = "grab";
+        });
+
+        card.addEventListener('mouseup', () => {
+            isDragging = false;
+            card.style.cursor = "grab";
+        });
+
+        card.addEventListener('mousemove', (e) => {
+            if(!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - card.offsetLeft;
+            const walk = (x - startX) * 2; // Velocidade de arrasto
+            card.scrollLeft = scrollLeft - walk;
+        });
     </script>
 </body>
 </html>
