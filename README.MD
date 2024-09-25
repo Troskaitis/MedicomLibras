@@ -87,23 +87,25 @@ A estrutura do projeto é organizada da seguinte forma:
 csharp
 cartao-medico-virtual/
 │
-
+│
 ├── app.py                   # Arquivo principal da aplicação Flask
-
+│
 ├── templates/                # Pasta contendo os templates HTML
-
+│   │
 │   ├── index.html            # Página inicial do formulário de cadastro
-
+│   │
 │   ├── card.html             # Página do cartão médico virtual
-
+│
 │
 ├── static/                   # Arquivos estáticos (CSS, imagens, etc.)
-
+│   │
 │   └── style.css             # Arquivo de estilização customizada (opcional)
-
+│
 │
 ├── README.md                 # Este arquivo README
+│
 ├── requirements.txt          # Dependências da aplicação
+│
 └── venv/                     # Ambiente virtual (opcional)
 
 ## Funcionalidades Futuras
