@@ -5,10 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Informações Médicas</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .btnbtn-dangerbtn-block {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 10px; /* Diminuindo o padding para ficar mais sutil */
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
         <h1 class="text-center">Cadastro de Informações Médicas</h1>
+        <p class="text-center">Usuário logado: {{ current_user.username }}</p>
+        <form method="POST" action="{{ url_for('logout') }}">
+            <button type="submit" class="btnbtn-dangerbtn-block">Logout</button>
+        </form>
         <br>
         <div class="row justify-content-center">
             <div class="col-md-6">
