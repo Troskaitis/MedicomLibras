@@ -6,6 +6,11 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from wtforms.fields import DateField
+import qrcode
+import os
+from io import BytesIO
+from flask import send_file
+
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
@@ -138,8 +143,34 @@ def card():
         surgery=surgery,
         family_diseases=family_diseases,
         allergies=allergies,
-        chronic_disease=chronic_disease
+        chronic_disease=chronic_disease,
+        user=current_user  # Passando o usuário atual para o template
     )
+    
+@app.route('/generate_qrcode')
+@login_required
+def generate_qrcode():
+    # O conteúdo do QR Code pode ser o ID do usuário, ou qualquer dado relevante
+    data = f'User ID: {current_user.id}, Username: {current_user.username}'
+    
+    # Gerar o QR Code
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    qr.add_data(data)
+    qr.make(fit=True)
+    
+    # Criar imagem em memória (sem salvar no disco)
+    img = qr.make_image(fill='black', back_color='white')
+    buf = BytesIO()
+    img.save(buf)
+    buf.seek(0)
+    
+    # Enviar a imagem como resposta
+    return send_file(buf, mimetype='image/png')
 
 # Rota para logout
 @app.route('/logout', methods=['GET', 'POST'])
