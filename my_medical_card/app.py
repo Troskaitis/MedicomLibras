@@ -10,6 +10,7 @@ import qrcode
 import os
 from io import BytesIO
 from flask import send_file
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -130,11 +131,14 @@ def card():
     family_diseases = request.args.get('family_diseases')
     allergies = request.args.get('allergies')
     chronic_disease = request.args.get('chronic_disease')
+    
+    # Converter a data de nascimento para o formato brasileiro (dia/mês/ano)
+    birth_date_formatted = datetime.strptime(birth_date, '%Y-%m-%d').strftime('%d/%m/%Y')
 
     return render_template('card.html', 
         name=name,
         blood_type=blood_type,
-        birth_date=birth_date,
+        birth_date=birth_date_formatted,
         rg=rg,
         cpf=cpf,
         sus_number=sus_number,
