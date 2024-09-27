@@ -93,3 +93,29 @@ button:hover {
 .hide-download {
     display: none;
 }
+/* Estilos padrão para desktops */
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Estilos para dispositivos móveis */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    /* Reduzindo o tamanho dos elementos */
+    .card {
+        padding: 10px;
+    }
+
+    /* Ajuste de texto */
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+}
