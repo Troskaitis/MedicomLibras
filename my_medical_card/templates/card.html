@@ -113,13 +113,14 @@
 
     <!-- Botão para download -->
     <div id="download-btn">
-        <button onclick="downloadCard()">Download</button>
+        <button class="btn btn-primary btn-download" onclick="downloadCard()">Download</button>
     </div>
 
     <!-- Inclusão da biblioteca html2canvas -->
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
     <script>
         function downloadCard() {
+            document.querySelector('.btn-download').classList.add('hide-download');
             html2canvas(document.querySelector("#card"), { // Captura o contêiner do cartão
                 scale: 2,  // Aumenta a escala do canvas para melhorar a qualidade
                 useCORS: true, // Habilita CORS para carregar imagens de domínios externos
@@ -129,42 +130,13 @@
                 a.href = canvas.toDataURL('image/png', 1.0); // Qualidade máxima
                 a.download = 'cartao-medico.png';
                 a.click();
+                document.querySelector('.btn-download').classList.remove('hide-download');
             });
         }
     </script>
 
     <!-- Script para adicionar arrastar o cartão -->
     <script>
-        let isDragging = false;
-        let startX;
-        let scrollLeft;
-
-        const card = document.querySelector('.card-container');
-
-        card.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.pageX - card.offsetLeft;
-            scrollLeft = card.scrollLeft;
-            card.style.cursor = "grabbing";
-        });
-
-        card.addEventListener('mouseleave', () => {
-            isDragging = false;
-            card.style.cursor = "grab";
-        });
-
-        card.addEventListener('mouseup', () => {
-            isDragging = false;
-            card.style.cursor = "grab";
-        });
-
-        card.addEventListener('mousemove', (e) => {
-            if(!isDragging) return;
-            e.preventDefault();
-            const x = e.pageX - card.offsetLeft;
-            const walk = (x - startX) * 2; // Velocidade de arrasto
-            card.scrollLeft = scrollLeft - walk;
-        });
     </script>
 </body>
 </html>

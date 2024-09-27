@@ -90,3 +90,6 @@ button:hover {
     font-weight: bold;
     margin-top: 50px;
 }
+.hide-download {
+    display: none;
+}
