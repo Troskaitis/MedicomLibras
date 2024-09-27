@@ -56,6 +56,18 @@
             width: 40px; /* Ajuste o tamanho conforme necessário */
             height: auto; /* Mantém a proporção da imagem */
         }
+        .qr-code {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 25%; /* Ajuste este valor conforme necessário */
+            height: auto;
+        }
+        
+        .qr-code img {
+            max-width: 100%; /* Garante que a imagem não ultrapasse o contêiner */
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -92,6 +104,9 @@
                 <p><strong>Doenças na Família:</strong> {{ family_diseases }}</p>
                 <p><strong>Alergias:</strong> {{ allergies }}</p>
                 <p><strong>Doença Crônica:</strong> {{ chronic_disease }}</p>
+            <!-- Exibir o QR Code -->
+            <div class="qr-code">
+                <img src="{{ url_for('generate_qrcode') }}" alt="QR Code" class="img-fluid">
             </div>
         </div>
     </div>
