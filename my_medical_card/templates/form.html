@@ -6,18 +6,33 @@
     <title>Cadastro de Informações Médicas</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        body {
+            background-image: url("{{ url_for('static', filename='background.png') }}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
         .btnbtn-dangerbtn-block {
             position: absolute;
             top: 15px;
             right: 15px;
-            padding: 5px 10px; /* Diminuindo o padding para ficar mais sutil */
+            padding: 5px 10px;
         }
         .logo {
             position: center;
-            top: 15px; /* Ajuste a posição vertical */
-            right: 15px; /* Ajuste a posição horizontal */
-            width: 100px; /* Ajuste o tamanho conforme necessário */
-            height: auto; /* Mantém a proporção da imagem */
+            top: 15px;
+            right: 15px;
+            width: 80px;
+            height: auto;
         }
     </style>
 </head>
