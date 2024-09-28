@@ -12,10 +12,18 @@
             right: 15px;
             padding: 5px 10px; /* Diminuindo o padding para ficar mais sutil */
         }
+        .logo {
+            position: center;
+            top: 15px; /* Ajuste a posição vertical */
+            right: 15px; /* Ajuste a posição horizontal */
+            width: 100px; /* Ajuste o tamanho conforme necessário */
+            height: auto; /* Mantém a proporção da imagem */
+        }
     </style>
 </head>
 <body>
     <div class="container mt-5">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
         <h1 class="text-center">Cadastro de Informações Médicas</h1>
         <p class="text-center">Usuário logado: {{ current_user.username }}</p>
         <form method="POST" action="{{ url_for('logout') }}">
