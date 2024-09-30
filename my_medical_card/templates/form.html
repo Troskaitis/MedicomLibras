@@ -10,23 +10,30 @@
             background-image: url("{{ url_for('static', filename='background.png') }}");
             background-size: cover;
             background-position: center;
-            height: auto;
             display: flex;
+            height: auto;
             justify-content: center;
             align-items: center;
         }
+
         .container {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.7);
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin: auto; 
+            max-width: 1000px;
+            width: 100%;
         }
+
         .btnbtn-dangerbtn-block {
             position: absolute;
             top: 15px;
             right: 15px;
             padding: 5px 10px;
         }
+
         .logo {
             position: center;
             top: 15px;
@@ -34,75 +41,118 @@
             width: 80px;
             height: auto;
         }
+
+        .sidebar {
+            height: 100%;
+            width: 240px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #f1f1f1;
+            background-color: rgba(255, 255, 255, 0.75);
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #333;
+            transition: 0.3s;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #ddd;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+            width: calc(100% - 260px);
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
-        <h1 class="text-center">Cadastro de Informações Médicas</h1>
-        <p class="text-center">Usuário logado: {{ current_user.username }}</p>
-        <form method="POST" action="{{ url_for('logout') }}">
-            <button type="submit" class="btnbtn-dangerbtn-block">Logout</button>
-        </form>
-        <br>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <form method="POST" action="/">
-                    {{ form.hidden_tag() }}
-                    <div class="form-group">
-                        {{ form.name.label(class="form-label") }}
-                        {{ form.name(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.blood_type.label(class="form-label") }}
-                        {{ form.blood_type(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.birth_date.label(class="form-label") }}
-                        {{ form.birth_date(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.rg.label(class="form-label") }}
-                        {{ form.rg(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.cpf.label(class="form-label") }}
-                        {{ form.cpf(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.sus_number.label(class="form-label") }}
-                        {{ form.sus_number(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.cid.label(class="form-label") }}
-                        {{ form.cid(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.medication.label(class="form-label") }}
-                        {{ form.medication(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.surgery.label(class="form-label") }}
-                        {{ form.surgery(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.family_diseases.label(class="form-label") }}
-                        {{ form.family_diseases(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.allergies.label(class="form-label") }}
-                        {{ form.allergies(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.chronic_disease.label(class="form-label") }}
-                        {{ form.chronic_disease(class="form-control") }}
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-block">Gerar Cartão</button>
-                </form>
+    
+    <div class="sidebar">
+        <a href="{{ url_for('index') }}">Formulário</a>
+        <a href="{{ url_for('informative') }}">Sobre</a>
+    </div>
+
+    <div class="main-content">
+        <div class="container mt-5">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+            <h1 class="text-center">Cadastro de Informações Médicas</h1>
+            <p class="text-center">Usuário logado: {{ current_user.username }}</p>
+            <form method="POST" action="{{ url_for('logout') }}">
+                <button type="submit" class="btnbtn-dangerbtn-block">Logout</button>
+            </form>
+            <br>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form method="POST" action="/">
+                        {{ form.hidden_tag() }}
+                        <div class="form-group">
+                            {{ form.name.label(class="form-label") }}
+                            {{ form.name(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.blood_type.label(class="form-label") }}
+                            {{ form.blood_type(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.birth_date.label(class="form-label") }}
+                            {{ form.birth_date(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.rg.label(class="form-label") }}
+                            {{ form.rg(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.cpf.label(class="form-label") }}
+                            {{ form.cpf(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.sus_number.label(class="form-label") }}
+                            {{ form.sus_number(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.cid.label(class="form-label") }}
+                            {{ form.cid(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.medication.label(class="form-label") }}
+                            {{ form.medication(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.surgery.label(class="form-label") }}
+                            {{ form.surgery(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.family_diseases.label(class="form-label") }}
+                            {{ form.family_diseases(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.allergies.label(class="form-label") }}
+                            {{ form.allergies(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.chronic_disease.label(class="form-label") }}
+                            {{ form.chronic_disease(class="form-control") }}
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block">Gerar Cartão</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+
     <!-- VLibras Widget -->
     <div vw class="enabled">
         <div vw-access-button class="active"></div>

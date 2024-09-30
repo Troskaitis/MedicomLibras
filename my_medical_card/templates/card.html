@@ -4,18 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cartão Médico Virtual</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        body {
+            background-image: url("{{ url_for('static', filename='background.png') }}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+        }
+
+        
+        .sidebar {
+            height: 100%;
+            width: 240px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(255, 255, 255, 0.75);
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            padding: 15px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #333;
+            transition: 0.3s;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #ddd;
+        }
+
+        .main-content {
+            margin-left: 260px; 
+            padding: 20px;
+            width: calc(100% - 260px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto; 
+        }
+
         .card-container {
             border: 1px solid #ccc;
             border-radius: 10px;
             padding: 20px;
             margin: 20px;
-            background-color: #f9f9f9;
+            background-color: rgba(255, 255, 255, 0.95);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 800px; /* Definindo um tamanho máximo para o cartão */
-            display: inline-block; /* Exibir em linha para capturar ambos os lados */
-            position: relative; /* Para permitir o posicionamento da imagem */
+            max-width: 800px;
+            width: 100%;
+            position: relative; 
         }
 
         .card-title, .verso-title {
@@ -23,16 +69,20 @@
             font-weight: bold;
             text-align: center;
             margin-bottom: 20px;
+            color: #007bff;
         }
 
         .info, .details {
             font-size: 16px;
             line-height: 1.5;
+            color: #333;
         }
 
         #download-btn {
-            text-align: center;
-            margin-top: 20px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(80%);
+            margin-top: 850px; 
         }
 
         button {
@@ -43,6 +93,7 @@
             background-color: #007bff;
             color: white;
             border-radius: 5px;
+            transition: background-color 0.3s;
         }
 
         button:hover {
@@ -51,69 +102,226 @@
 
         .logo {
             position: absolute;
-            top: 15px; /* Ajuste a posição vertical */
-            right: 15px; /* Ajuste a posição horizontal */
-            width: 60px; /* Ajuste o tamanho conforme necessário */
-            height: auto; /* Mantém a proporção da imagem */
+            top: 15px;
+            right: 15px;
+            width: 60px;
+            height: auto;
         }
+
         .qr-code {
             position: absolute;
-            bottom: 5px;
-            right: 5px;
-            width: 25%; /* Ajuste este valor conforme necessário */
+            bottom: 10px;
+            right: 10px;
+            width: 140px; /* Tamanho fixo para melhor consistência */
             height: auto;
         }
         
         .qr-code img {
-            max-width: 100%; /* Garante que a imagem não ultrapasse o contêiner */
+            max-width: 100%;
             height: auto;
         }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .main-content {
+                margin-left: 220px;
+            }
+
+            .card-container {
+                padding: 15px;
+                margin: 10px;
+            }
+
+            .card-title, .verso-title {
+                font-size: 20px;
+            }
+
+            .qr-code {
+                width: 60px;
+            }
+        }
+        body {
+            background-color: #f0f4f7;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card-container {
+            width: 650px;
+            height: 350px; 
+            border-radius: 15px;
+            background: linear-gradient(135deg, #1560eb 2%, #ffffff 20%);
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            color: #003366;
+            font-family: Arial, sans-serif;
+            position: relative;
+            margin-bottom: 40px; 
+        }
+        .card-title {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+        }
+        .company-name {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+        .name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 50px;
+        }
+        .info {
+            margin-top: 10px;
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #003366;
+        }
+        .details {
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+        #download-btn {
+            display: flex;
+            position: center;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .verso-title {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+        }
+        .card-title {
+            color: #003366;
+        }
+        .verso-title {
+            color: #003366;
+        }
+        .DM{
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 50px;
+        }
+        .hide-download {
+            display: none;
+        }
+        /* Estilos padrão para desktops */
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        
+        /* Estilos para dispositivos móveis */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+        
+            /* Reduzindo o tamanho dos elementos */
+            .card {
+                padding: 10px;
+            }
+        
+            /* Ajuste de texto */
+            h1 {
+                font-size: 24px;
+            }
+        
+            h2 {
+                font-size: 20px;
+            }
+        }
+        
+
     </style>
 </head>
 <body>
-    <div id="card" style="display: flex; flex-direction: column; align-items: center;"> <!-- Contêiner para o cartão -->
-        <!-- Frente do Cartão -->
-        <div class="card-container" id="card-front">
-            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo"> <!-- Imagem no canto superior direito -->
-            <div class="card-title">Cartão Médico Virtual</div>
-            <div class="name">{{ name }}</div>
-            <br>
-            <div class="info">
-                <div><strong>Tipagem Sanguínea:</strong> {{ blood_type }}</div>
-                <div><strong>Data de Nascimento:</strong> {{ birth_date }}</div>
-            </div>
-            <div class="details">
-                <br>
-                <p><strong>RG:</strong> {{ rg }}</p>
-                <p><strong>CPF:</strong> {{ cpf }}</p>
-                <p><strong>Número do Cartão SUS:</strong> {{ sus_number }}</p>
-                <p><strong>CID:</strong> {{ cid }}</p>
-            </div>
-        </div>
-
-        <!-- Verso do Cartão -->
-        <div class="card-container" id="card-back">
-            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
-            <div class="verso-title">Cartão Médico Virtual</div>
-            <div class="DM">Dados Médicos</div>
-            <div class="info"></div>
-            <div class="details">
-                <br>
-                <p><strong>Remédio Controlado:</strong> {{ medication }}</p>
-                <p><strong>Histórico de Cirurgias:</strong> {{ surgery }}</p>
-                <p><strong>Doenças na Família:</strong> {{ family_diseases }}</p>
-                <p><strong>Alergias:</strong> {{ allergies }}</p>
-                <p><strong>Doença Crônica:</strong> {{ chronic_disease }}</p>
-            <!-- Exibir o QR Code -->
-            <div class="qr-code">
-                <img src="{{ url_for('generate_qrcode') }}" alt="QR Code" class="img-fluid">
-            </div>
-        </div>
+    <!-- Menu lateral estilo Streamlit -->
+    <div class="sidebar">
+        <a href="{{ url_for('index') }}">Formulário</a>
+        <a href="{{ url_for('informative') }}">Sobre</a>
     </div>
 
-    <!-- Botão para download -->
-    <div id="download-btn">
-        <button class="btn btn-primary btn-download" onclick="downloadCard()">Download</button>
+    <div class="main-content">
+        <div id="card" style="display: flex; flex-direction: column; align-items: center;">
+            <!-- Frente do Cartão -->
+            <div class="card-container" id="card-front">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+                <div class="card-title">Cartão Médico Virtual</div>
+                <div class="name text-center" style="font-size: 20px; font-weight: bold;">{{ name }}</div>
+                <br>
+                <div class="info">
+                    <div><strong>Tipagem Sanguínea:</strong> {{ blood_type }}</div>
+                    <div><strong>Data de Nascimento:</strong> {{ birth_date }}</div>
+                </div>
+                <div class="details">
+                    <br>
+                    <p><strong>RG:</strong> {{ rg }}</p>
+                    <p><strong>CPF:</strong> {{ cpf }}</p>
+                    <p><strong>Número do Cartão SUS:</strong> {{ sus_number }}</p>
+                    <p><strong>CID:</strong> {{ cid }}</p>
+                </div>
+            </div>
+
+            <!-- Verso do Cartão -->
+            <div class="card-container" id="card-back">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+                <div class="verso-title">Cartão Médico Virtual</div>
+                <div class="DM text-center" style="font-size: 18px; font-weight: bold; margin-bottom: 15px;">Dados Médicos</div>
+                <div class="info"></div>
+                <div class="details">
+                    <br>
+                    <p><strong>Remédio Controlado:</strong> {{ medication }}</p>
+                    <p><strong>Histórico de Cirurgias:</strong> {{ surgery }}</p>
+                    <p><strong>Doenças na Família:</strong> {{ family_diseases }}</p>
+                    <p><strong>Alergias:</strong> {{ allergies }}</p>
+                    <p><strong>Doença Crônica:</strong> {{ chronic_disease }}</p>
+                </div>
+                <!-- Exibir o QR Code -->
+                <div class="qr-code">
+                    <img src="{{ url_for('generate_qrcode') }}" alt="QR Code" class="img-fluid">
+                </div>
+            </div>
+        </div>
+        <!-- Botão para download -->
+        <div id="download-btn">
+            <button class="btn btn-primary btn-download" onclick="downloadCard()">Download</button>
+        </div>
     </div>
 
     <!-- Inclusão da biblioteca html2canvas -->
@@ -134,6 +342,7 @@
             });
         }
     </script>
+    
     <!-- VLibras Widget -->
     <div vw class="enabled">
         <div vw-access-button class="active"></div>
@@ -144,8 +353,6 @@
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
-    <script>
     </script>
 </body>
 </html>
