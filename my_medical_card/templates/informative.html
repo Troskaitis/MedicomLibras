@@ -88,13 +88,20 @@
             <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
             <h1 class="text-center">Sobre o Projeto</h1>
             <br>
-            <p class="text-center">Como parte da grade curricular do eixo de Computação da <a href="https://univesp.br/">UNIVESP</a>, Universidade Virtual do Estado de São Paulo, o desenvolvimento desta plataforma tem como intuito implementar uma solução para um problema real, utilizando linguagens de programação, banco de dados, controle de versão, API e acessibilidade.</p>
+            <p class="text-center">Como parte da grade curricular do eixo de Computação da <a href="https://univesp.br/">UNIVESP</a>, Universidade Virtual do Estado de São Paulo, o desenvolvimento desta plataforma tem como intuito implementar uma solução para um problema real, utilizando linguagens de programação, banco de dados, controle de versão, API e acessibilidade. O projeto foi desenvolvido pelos alunos do 6 semestre do curso de Ciência de Dados.</p>
             <br>
             <h1 class="text-center">Problema</h1>
             <br>
+            <p class="text-center">As dificuldades enfrentadas por pessoas que possuem deficiência auditiva em se comunicar em ambientes de saúde, como UBS, prontos socorros e hospitais em geral, devido as barreiras linguisticas e a falta de acessibilidade e/ou comunicação ineficiente. O objetivo principal é possibilitar que essas pessoas possuam um meio de transimitir com maior facilidade e precisão, suas informações médicas básicas, como por exemplo, alergia a medicamentos, tipagem sanguinea, histórico de cirurgia, se possuem doênças crônicas, dentre outros dados, facilitando o atendimento, triagem, e até mesmo, um atendimento emergencial ao paciente.</p>
+            <br>
             <h1 class="text-center">Solução</h1>
             <br>
-            <p class="text-center">A aplicação possui 3 etapas, cadastro na plataforma, preeenchimento do formulário com as informações pessoais, e a geração do cartão virtual contendo estas informações. Como o foco principal é ajudar pessoas com algum tipo de deficiencia auditiva, a plataforma possui integração com o conjunto de ferramentas <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/vlibras">Vlibras</a>, responsável por viabilizar a tradução de conteúdos digitais em tempo real. Voce pode contribuir para o projeto acessando nosso repositoro no <a href="https://github.com/Troskaitis/my_medical_card">GitHub</a>. </p>
+            <p class="text-center">A aplicação possui 3 etapas, cadastro na plataforma, preeenchimento do formulário com as informações pessoais, e a geração do cartão virtual contendo estas informações. Como o foco principal é ajudar pessoas que possuem algum tipo de deficiência auditiva, a plataforma possui integração com o conjunto de ferramentas <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/vlibras">Vlibras</a>, responsável por viabilizar a tradução de conteúdos digitais em tempo real. Você pode contribuir para o projeto acessando nosso repositório no <a href="https://github.com/Troskaitis/my_medical_card">GitHub</a>. </p>
+
+            <br>
+            <p class="text-center">Cartão Médico Virtual</p>
+            <img src="{{ url_for('static', filename='cartao-medico.png') }}" alt="Exemplo" class="img-fluid">
+
         </div>
     </div>
     <form method="POST" action="{{ url_for('logout') }}">
