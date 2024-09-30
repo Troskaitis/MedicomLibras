@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informações sobre o Projeto</title>
+    <title>Sobre</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -72,7 +72,7 @@
         }
         .img-fluid {
             position: center;
-            width: auto;
+            width: 300px;
         }
     </style>
 </head>
@@ -87,11 +87,14 @@
         <div class="container mt-5">
             <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
             <h1 class="text-center">Sobre o Projeto</h1>
-            
-            <p class="text-center">Esta é uma página para fornecer informações adicionais sobre o projeto.</p>
-            <p class="text-center">Você pode adicionar mais conteúdo conforme necessário, incluindo imagens, descrições e outros detalhes.</p>
-            <p class="text-center">Exemplo de imagem:</p>
-            <img src="{{ url_for('static', filename='exemplo.png') }}" alt="Exemplo" class="img-fluid">
+            <br>
+            <p class="text-center">Como parte da grade curricular do eixo de Computação da <a href="https://univesp.br/">UNIVESP</a>, Universidade Virtual do Estado de São Paulo, o desenvolvimento desta plataforma tem como intuito implementar uma solução para um problema real, utilizando linguagens de programação, banco de dados, controle de versão, API e acessibilidade.</p>
+            <br>
+            <h1 class="text-center">Problema</h1>
+            <br>
+            <h1 class="text-center">Solução</h1>
+            <br>
+            <p class="text-center">A aplicação possui 3 etapas, cadastro na plataforma, preeenchimento do formulário com as informações pessoais, e a geração do cartão virtual contendo estas informações. Como o foco principal é ajudar pessoas com algum tipo de deficiencia auditiva, a plataforma possui integração com o conjunto de ferramentas <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/vlibras">Vlibras</a>, responsável por viabilizar a tradução de conteúdos digitais em tempo real. Voce pode contribuir para o projeto acessando nosso repositoro no <a href="https://github.com/Troskaitis/my_medical_card">GitHub</a>. </p>
         </div>
     </div>
     <form method="POST" action="{{ url_for('logout') }}">
