@@ -93,6 +93,12 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
+# Página Sobre
+@app.route('/informative')
+@login_required
+def informative():
+    return render_template('informative.html')
+
 # Página inicial com formulário (restrita a usuários logados)
 @app.route('/', methods=['GET', 'POST'])
 @login_required
