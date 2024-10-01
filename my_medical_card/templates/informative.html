@@ -10,8 +10,10 @@
             background-image: url("{{ url_for('static', filename='background.png') }}");
             background-size: cover;
             background-position: center;
-            height: 100vh;
             display: flex;
+            height: auto;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
@@ -71,8 +73,10 @@
             height: auto;
         }
         .img-fluid {
-            position: center;
-            width: 300px;
+            display: block; /* Define a imagem como um bloco */
+            margin: 20px auto; /* Centraliza horizontalmente e ajusta o espaçamento vertical */
+            max-width: 40%; /* Garante que a imagem se ajuste ao contêiner sem ultrapassá-lo */
+            height: auto; /* Mantém a proporção da imagem */
         }
     </style>
 </head>
@@ -97,9 +101,8 @@
             <h1 class="text-center">Solução</h1>
             <br>
             <p class="text-center">A aplicação possui 3 etapas, cadastro na plataforma, preeenchimento do formulário com as informações pessoais, e a geração do cartão virtual contendo estas informações. Como o foco principal é ajudar pessoas que possuem algum tipo de deficiência auditiva, a plataforma possui integração com o conjunto de ferramentas <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/vlibras">Vlibras</a>, responsável por viabilizar a tradução de conteúdos digitais em tempo real. Você pode contribuir para o projeto acessando nosso repositório no <a href="https://github.com/Troskaitis/my_medical_card">GitHub</a>. </p>
-
             <br>
-            <p class="text-center">Cartão Médico Virtual</p>
+            <p class="text-center">Cartão gerado pela aplicação</p>
             <img src="{{ url_for('static', filename='cartao-medico.png') }}" alt="Exemplo" class="img-fluid">
 
         </div>
