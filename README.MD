@@ -85,3 +85,6 @@ MedicomLibras/
 
 ### Tela do Formulário Médico
 ![Tela do Formulário Médico](assets/screenshot_form.png)
+
+### Cartão Médico Virtual
+![Cartão Médico Virtual](assets/screenshot_card.png)
