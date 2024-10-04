@@ -88,3 +88,4 @@ MedicomLibras/
 
 ### Cartão Médico Virtual
 ![Cartão Médico Virtual](assets/screenshot_card.png)
+
