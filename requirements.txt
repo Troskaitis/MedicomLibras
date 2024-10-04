@@ -6,3 +6,4 @@ Flask-Login
 Werkzeug
 qrcode
 gunicorn
+qrcode[pil]
