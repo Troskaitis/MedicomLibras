@@ -2,7 +2,7 @@
 
 ## Descrição
 
-O **Medicom Libras** é uma aplicação web construída em Flask que permite gerar um cartão médico virtual com informações importantes, como tipo sanguíneo, histórico médico e alergias. O objetivo é auxiliar pessoas com deficiências auditivas e orais a ter suas informações de saúde rapidamente acessíveis para facilitar o atendimento médico.
+O **Medicom Libras** é uma aplicação web construída em Flask que permite gerar um cartão médico virtual com informações importantes, como tipo sanguíneo, histórico médico e alergias. O objetivo é auxiliar pessoas com deficiência auditiva, a transmitirem suas informações de saúde com maior facilidade, a fim de otimizar o atendimento médico, e melhorar a qualidade de comunicação em ambientes hospitalares.
 
 ## Funcionalidades
 - Formulário para coleta de informações pessoais e médicas.
