@@ -55,7 +55,7 @@ pip install -r requirements.txt
 ## Estrutura do Projeto
 
 ```bash
-my_medical_card/
+MedicomLibras/
 ├── app.py                 # Arquivo principal da aplicação Flask
 ├── config.py              # Configurações da aplicação
 ├── instance/              # Diretório com a base de dados SQLite
