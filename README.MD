@@ -52,7 +52,7 @@ pip install -r requirements.txt
 
 ## Estrutura do Projeto
 
-
+```bash
 my_medical_card/
 ├── app.py                 # Arquivo principal da aplicação Flask
 ├── config.py              # Configurações da aplicação
@@ -71,4 +71,4 @@ my_medical_card/
 │   └── informative.html
 ├── requirements.txt       # Lista de dependências
 └── README.md              # Arquivo README com instruções do projeto
-
+```
