@@ -78,13 +78,13 @@ MedicomLibras/
 ## Screenshots
 
 ### Tela de Login
-![Tela de Login](D:\Scripts\my_medical_card\assets\screenshot_login.png)
+![Tela de Login](assets/screenshot_login.png)
 
 ### Tela de Cadastro
-![Tela de Cadastro](D:\Scripts\my_medical_card\assets\screenshot_register.png)
+![Tela de Cadastro](assets/screenshot_register.png)
 
 ### Tela do Formulário Médico
-![Tela do Formulário Médico](D:\Scripts\my_medical_card\assets\screenshot_form.png)
+![Tela do Formulário Médico](assets/screenshot_form.png)
 
 ### Cartão Médico Virtual (Frente)
-![Cartão Médico Virtual](D:\Scripts\my_medical_card\assets\screenshot_card.png)
+![Cartão Médico Virtual](assets/screenshot_card.png)
