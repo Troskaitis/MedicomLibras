@@ -10,6 +10,7 @@ O **Medicom Libras** é uma aplicação web construída em Flask que permite ger
 - Download do cartão como imagem.
 - Layout responsivo e moderno.
 - Tradução automatica em libras.
+- Qrcode vinculado ao usuário cadastrado.
 
 ## Executando o projeto
 
@@ -17,13 +18,13 @@ O **Medicom Libras** é uma aplicação web construída em Flask que permite ger
 ### Clone o repositório:
 
 ```bash
-git clone https://github.com/seu_usuario/my_medical_card.git
+git clone https://github.com/seu_usuario/MedicomLibras.git
 ```
 
 ### Acesse o diretório do projeto:
 
 ```bash
-cd my_medical_card
+cd MedimLibras
 ```
 
 ### Execute o servidor Flask:
