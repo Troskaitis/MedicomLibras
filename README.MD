@@ -9,6 +9,7 @@ O **Medicom Libras** é uma aplicação web construída em Flask que permite ger
 - Geração de um cartão médico virtual, com frente e verso.
 - Download do cartão como imagem.
 - Layout responsivo e moderno.
+- Tradução automatica em libras.
 
 ## Executando o projeto
 
