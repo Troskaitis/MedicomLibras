@@ -24,7 +24,7 @@ git clone https://github.com/seu_usuario/MedicomLibras.git
 ### Acesse o diretório do projeto:
 
 ```bash
-cd MedimLibras
+cd MedicomLibras
 ```
 
 ### Execute o servidor Flask:
