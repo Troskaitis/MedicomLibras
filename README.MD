@@ -1,5 +1,9 @@
 # Medicom Libras (Cartão Médico Virtual)
 
+## Acesse online:
+
+https://web-production-a5052.up.railway.app/register
+
 ## Descrição
 
 O **Medicom Libras** é uma aplicação web construída em Flask que permite gerar um cartão médico virtual com informações importantes, como tipo sanguíneo, histórico médico e alergias. O objetivo é auxiliar pessoas com deficiência auditiva, a transmitirem suas informações de saúde com maior facilidade, a fim de otimizar o atendimento médico, e melhorar a qualidade de comunicação em ambientes hospitalares.
