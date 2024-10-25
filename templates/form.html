@@ -147,6 +147,10 @@
                         </div>
                         
                         <button type="submit" class="btn btn-primary btn-block">Gerar Cartão</button>
+                        {# Botão Acessar Cartão, exibido apenas se os dados médicos existirem #}
+                        {% if medical_record_exists %}
+                        <a href="{{ url_for('card') }}" class="btn btn-secondary">Acessar Cartão</a>
+                        {% endif %}
                     </form>
                 </div>
             </div>

@@ -65,6 +65,26 @@ class MedicalForm(FlaskForm):
     allergies = TextAreaField('Possui alergia a algum remédio?', validators=[DataRequired()])
     chronic_disease = TextAreaField('Possui doença crônica?', validators=[DataRequired()])
     submit = SubmitField('Gerar Cartão')
+    
+
+class MedicalRecord(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # Relacionamento com o usuário
+    name = db.Column(db.String(150), nullable=False)
+    blood_type = db.Column(db.String(3), nullable=False)
+    birth_date = db.Column(db.Date, nullable=False)
+    rg = db.Column(db.String(20), nullable=False)
+    cpf = db.Column(db.String(20), nullable=False)
+    sus_number = db.Column(db.String(20), nullable=False)
+    cid = db.Column(db.String(10), nullable=False)
+    medication = db.Column(db.Text, nullable=False)
+    surgery = db.Column(db.Text, nullable=False)
+    family_diseases = db.Column(db.Text, nullable=False)
+    allergies = db.Column(db.Text, nullable=False)
+    chronic_disease = db.Column(db.Text, nullable=False)
+
+    user = db.relationship('User', backref='medical_records')  # Relacionamento com o modelo User
+
 
 # Página de login
 @app.route('/login', methods=['GET', 'POST'])
@@ -104,42 +124,77 @@ def informative():
 @login_required
 def index():
     form = MedicalForm()
+
+    # Verifique se já existe um registro médico para o usuário logado
+    existing_record = MedicalRecord.query.filter_by(user_id=current_user.id).first()
+    
+    # Preenche o formulário com os dados existentes, se houver
+    if existing_record:
+        form.name.data = existing_record.name
+        form.blood_type.data = existing_record.blood_type
+        form.birth_date.data = existing_record.birth_date
+        form.rg.data = existing_record.rg
+        form.cpf.data = existing_record.cpf
+        form.sus_number.data = existing_record.sus_number
+        form.cid.data = existing_record.cid
+        form.medication.data = existing_record.medication
+        form.surgery.data = existing_record.surgery
+        form.family_diseases.data = existing_record.family_diseases
+        form.allergies.data = existing_record.allergies
+        form.chronic_disease.data = existing_record.chronic_disease
+
+    # Quando o formulário é enviado
     if form.validate_on_submit():
-        return redirect(url_for('card', 
-            name=form.name.data,
-            blood_type=form.blood_type.data,
-            birth_date=form.birth_date.data,
-            rg=form.rg.data,
-            cpf=form.cpf.data,
-            sus_number=form.sus_number.data,
-            cid=form.cid.data,
-            medication=form.medication.data,
-            surgery=form.surgery.data,
-            family_diseases=form.family_diseases.data,
-            allergies=form.allergies.data,
-            chronic_disease=form.chronic_disease.data
-        ))
+        if existing_record:
+            # Atualiza o registro existente
+            existing_record.name = form.name.data
+            existing_record.blood_type = form.blood_type.data
+            existing_record.birth_date = form.birth_date.data
+            existing_record.rg = form.rg.data
+            existing_record.cpf = form.cpf.data
+            existing_record.sus_number = form.sus_number.data
+            existing_record.cid = form.cid.data
+            existing_record.medication = form.medication.data
+            existing_record.surgery = form.surgery.data
+            existing_record.family_diseases = form.family_diseases.data
+            existing_record.allergies = form.allergies.data
+            existing_record.chronic_disease = form.chronic_disease.data
+        else:
+            # Cria um novo registro se nenhum existir
+            new_record = MedicalRecord(
+                user_id=current_user.id,
+                name=form.name.data,
+                blood_type=form.blood_type.data,
+                birth_date=form.birth_date.data,
+                rg=form.rg.data,
+                cpf=form.cpf.data,
+                sus_number=form.sus_number.data,
+                cid=form.cid.data,
+                medication=form.medication.data,
+                surgery=form.surgery.data,
+                family_diseases=form.family_diseases.data,
+                allergies=form.allergies.data,
+                chronic_disease=form.chronic_disease.data
+            )
+            db.session.add(new_record)
+        
+        db.session.commit()
+        flash('Dados médicos salvos com sucesso!', 'success')
+        return redirect(url_for('card'))
+
     return render_template('form.html', form=form)
 
 # Página do cartão virtual (restrita a usuários logados)
 @app.route('/card')
 @login_required
 def card():
-    name = request.args.get('name')
-    blood_type = request.args.get('blood_type')
-    birth_date = request.args.get('birth_date')
-    rg = request.args.get('rg')
-    cpf = request.args.get('cpf')
-    sus_number = request.args.get('sus_number')
-    cid = request.args.get('cid')
-    medication = request.args.get('medication')
-    surgery = request.args.get('surgery')
-    family_diseases = request.args.get('family_diseases')
-    allergies = request.args.get('allergies')
-    chronic_disease = request.args.get('chronic_disease')
-    
-    # Converter a data de nascimento para o formato brasileiro (dia/mês/ano)
-    birth_date_formatted = datetime.strptime(birth_date, '%Y-%m-%d').strftime('%d/%m/%Y')
+    record = MedicalRecord.query.filter_by(user_id=current_user.id).first()
+    if record:
+        birth_date_formatted = record.birth_date.strftime('%d/%m/%Y')
+        return render_template('card.html', record=record, birth_date=birth_date_formatted)
+    else:
+        flash('Nenhum dado médico encontrado para o usuário.', 'info')
+        return redirect(url_for('index'))
 
     return render_template('card.html', 
         name=name,

@@ -285,18 +285,18 @@
             <div class="card-container" id="card-front">
                 <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
                 <div class="card-title">Cartão Médico Virtual</div>
-                <div class="name text-center" style="font-size: 20px; font-weight: bold;">{{ name }}</div>
+                <div class="name text-center" style="font-size: 20px; font-weight: bold;">{{ record.name }}</div>
 
                 <div class="info">
-                    <div><strong>Tipagem Sanguínea:</strong> {{ blood_type }}</div>
+                    <div><strong>Tipagem Sanguínea:</strong> {{ record.blood_type }}</div>
                     <div><strong>Data de Nascimento:</strong> {{ birth_date }}</div>
                 </div>
                 <div class="details">
                     <br>
-                    <p><strong>RG:</strong> {{ rg }}</p>
-                    <p><strong>CPF:</strong> {{ cpf }}</p>
-                    <p><strong>Número do Cartão SUS:</strong> {{ sus_number }}</p>
-                    <p><strong>CID:</strong> {{ cid }}</p>
+                    <p><strong>RG:</strong> {{ record.rg }}</p>
+                    <p><strong>CPF:</strong> {{ record.cpf }}</p>
+                    <p><strong>Número do Cartão SUS:</strong> {{ record.sus_number }}</p>
+                    <p><strong>CID:</strong> {{ record.cid }}</p>
                 </div>
             </div>
 
@@ -308,11 +308,11 @@
                 <div class="info"></div>
                 <div class="details">
                     <br>
-                    <p><strong>Remédio Controlado:</strong> {{ medication }}</p>
-                    <p><strong>Histórico de Cirurgias:</strong> {{ surgery }}</p>
-                    <p><strong>Doenças na Família:</strong> {{ family_diseases }}</p>
-                    <p><strong>Alergias:</strong> {{ allergies }}</p>
-                    <p><strong>Doença Crônica:</strong> {{ chronic_disease }}</p>
+                    <p><strong>Remédio Controlado:</strong> {{ record.medication }}</p>
+                    <p><strong>Histórico de Cirurgias:</strong> {{ record.surgery }}</p>
+                    <p><strong>Doenças na Família:</strong> {{ record.family_diseases }}</p>
+                    <p><strong>Alergias:</strong> {{ record.allergies }}</p>
+                    <p><strong>Doença Crônica:</strong> {{ record.chronic_disease }}</p>
                 </div>
                 <!-- Exibir o QR Code -->
                 <div class="qr-code">
