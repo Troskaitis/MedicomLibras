@@ -10,54 +10,201 @@
             background-image: url("{{ url_for('static', filename='background.png') }}");
             background-size: cover;
             background-position: center;
-            height: 100vh;
+            background-attachment: fixed;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
+        .logo {
+            max-width: 80px;
+            height: auto;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
         .container {
             background: rgba(255, 255, 255, 0.9);
-            padding: 40px;
+            padding: 15px;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 100%;
+            margin: 15px;
         }
-        .logo {
-            position: center;
-            top: 15px;
-            right: 15px;
-            width: 80px;
-            height: auto;
+
+        .form-wrapper {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-control {
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Ajustes para mensagens de validação */
+        .invalid-feedback {
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        /* Media Query para tablets e desktop */
+        @media (min-width: 768px) {
+            .container {
+                padding: 30px;
+                max-width: 500px;
+                margin: 20px auto;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .form-control {
+                font-size: 16px;
+            }
+
+            .logo {
+                max-width: 100px;
+            }
+
+            .invalid-feedback {
+                font-size: 14px;
+            }
+        }
+
+        /* Estilos específicos para smartphones pequenos */
+        @media (max-width: 380px) {
+            .container {
+                padding: 10px;
+                margin: 10px;
+            }
+
+            .form-group {
+                margin-bottom: 8px;
+            }
+
+            .form-control {
+                font-size: 13px;
+                height: auto;
+                padding: 6px;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+            }
+
+            .logo {
+                max-width: 60px;
+            }
+
+            .btn {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .invalid-feedback {
+                font-size: 11px;
+            }
+        }
+
+        /* Ajustes para mensagens de erro ou sucesso */
+        .alert {
+            margin-bottom: 15px;
+            font-size: 14px;
+            padding: 10px;
+        }
+
+        /* Ajustes para o link de login */
+        .login-link {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        /* Ajustes para campos de senha */
+        .password-field {
+            position: relative;
+        }
+
+        .password-requirements {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        @media (min-width: 768px) {
+            .password-requirements {
+                font-size: 13px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
-        <h1 class="text-center">Cadastro</h1>
-        <br>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <form method="POST" action="/register">
-                    {{ form.hidden_tag() }}
-                    <div class="form-group">
-                        {{ form.username.label(class="form-label") }}
-                        {{ form.username(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.password.label(class="form-label") }}
-                        {{ form.password(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.confirm_password.label(class="form-label") }}
-                        {{ form.confirm_password(class="form-control") }}
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
-                </form>
-                <br>
-                <p class="text-center">Já tem conta? <a href="/login">Faça login</a></p>
-            </div>
+        <div class="form-wrapper">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+            <h1>Cadastro</h1>
+            
+            <form method="POST" action="/register">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.username.label(class="form-label") }}
+                    {{ form.username(class="form-control") }}
+                    {% if form.username.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in form.username.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group password-field">
+                    {{ form.password.label(class="form-label") }}
+                    {{ form.password(class="form-control") }}
+                    {% if form.password.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in form.password.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group password-field">
+                    {{ form.confirm_password.label(class="form-label") }}
+                    {{ form.confirm_password(class="form-control") }}
+                    {% if form.confirm_password.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in form.confirm_password.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+            </form>
+            
+            <p class="text-center login-link">
+                Já tem conta? <a href="/login">Faça login</a>
+            </p>
         </div>
     </div>
+
     <!-- VLibras Widget -->
     <div vw class="enabled">
         <div vw-access-button class="active"></div>

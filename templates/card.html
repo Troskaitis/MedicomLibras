@@ -6,277 +6,263 @@
     <title>Cartão Médico Virtual</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
-            background-image: url("{{ url_for('static', filename='background.png') }}");
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-        }
+    /* Estilos base */
+    body {
+        background-image: url("{{ url_for('static', filename='background.png') }}");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
 
-        
+    /* Estilos para dispositivos móveis (padrão) */
+    .sidebar {
+        background-color: rgba(255, 255, 255, 0.75);
+        padding: 10px;
+        width: 100%;
+        position: relative;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .sidebar a {
+        padding: 8px 15px;
+        text-decoration: none;
+        color: #333;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .main-content {
+        width: 100%;
+        padding: 15px;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto;
+    }
+
+    /* Estilos do cartão */
+    #card {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 10px;
+    }
+
+    .card-container {
+        width: 100%;
+        max-width: 500px;
+        min-height: 280px;
+        border-radius: 15px;
+        background: #ffffff;
+        padding: 15px;
+        margin: 10px auto;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+        background: linear-gradient(135deg, #1560eb 1%, #ffffff 20%);
+    }
+
+    .logo {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: auto;
+    }
+
+    .card-title, .verso-title {
+        font-size: 1.3rem;
+        color: #003366;
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 5px;
+    }
+
+    .name, .DM {
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin: 15px 0;
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 10px 0;
+        font-size: 0.9rem;
+    }
+
+    .details {
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+
+    .details p {
+        margin: 5px 0;
+    }
+
+    .qr-code {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 80px;
+    }
+
+    .qr-code img {
+        width: 100%;
+        height: auto;
+    }
+
+    #download-btn {
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    .btn-download {
+        padding: 8px 16px;
+        font-size: 14px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Media Query para tablets e desktop */
+    @media (min-width: 768px) {
         .sidebar {
-            height: 100%;
             width: 240px;
+            height: 100vh;
             position: fixed;
-            top: 0;
             left: 0;
-            background-color: rgba(255, 255, 255, 0.75);
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-            display: flex;
+            top: 0;
+            padding: 20px;
+        }
+        
+        .sidebar-nav {
             flex-direction: column;
-            padding-top: 20px;
-            z-index: 1000;
+            align-items: stretch;
         }
 
         .sidebar a {
-            padding: 15px 20px;
-            text-decoration: none;
-            font-size: 18px;
-            color: #333;
-            transition: 0.3s;
-            display: block;
-        }
-
-        .sidebar a:hover {
-            background-color: #ddd;
+            font-size: 16px;
+            margin: 5px 0;
         }
 
         .main-content {
-            margin-left: 260px; 
+            margin-left: 240px;
             padding: 20px;
-            width: calc(100% - 260px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-y: auto; 
+            width: calc(100% - 240px);
+        }
+
+        .container {
+            padding: 30px;
+            max-width: 900px;
+            margin: 20px auto;
         }
 
         .card-container {
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            width: 100%;
-            position: relative; 
-        }
-
-        .card-title, .verso-title {
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #007bff;
-        }
-
-        .info, .details {
-            font-size: 16px;
-            line-height: 1.5;
-            color: #333;
-        }
-
-        #download-btn {
-            position: absolute;
-            left: 50%;
-            transform: translateX(80%);
-            margin-top: 850px; 
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #0056b3;
+            width: 650px;
+            max-width: 650px;
+            height: 350px;
+            padding: 25px;
+            margin: 20px auto;
         }
 
         .logo {
-            position: absolute;
-            top: 15px;
-            right: 15px;
             width: 60px;
-            height: auto;
+        }
+
+        .card-title, .verso-title {
+            font-size: 1.8rem;
+        }
+
+        .name, .DM {
+            font-size: 1.5rem;
+        }
+
+        .info {
+            flex-direction: row;
+            justify-content: space-between;
+            font-size: 1rem;
+        }
+
+        .details {
+            font-size: 1rem;
         }
 
         .qr-code {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            width: 140px; /* Tamanho fixo para melhor consistência */
-            height: auto;
-        }
-        
-        .qr-code img {
-            max-width: 100%;
-            height: auto;
+            width: 140px;
         }
 
-        /* Responsividade para telas menores */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 200px;
-            }
-
-            .main-content {
-                margin-left: 220px;
-            }
-
-            .card-container {
-                padding: 15px;
-                margin: 10px;
-            }
-
-            .card-title, .verso-title {
-                font-size: 20px;
-            }
-
-            .qr-code {
-                width: 60px;
-            }
-        }
-        body {
-            background-color: #f0f4f7;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .card-container {
-            width: 650px;
-            height: 350px; 
-            border-radius: 15px;
-            background: linear-gradient(135deg, #1560eb 1%, #ffffff 20%);
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            color: #003366;
-            font-family: Arial, sans-serif;
-            position: relative;
-            margin-bottom: 40px; 
-        }
-        .card-title {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #ffffff;
-            text-align: center;
-        }
-        .company-name {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 1.2rem;
-            color: #ffffff;
-        }
-        .name {
-            display: flex;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-top: 50px;
-        }
-        .info {
-            margin-top: 10px;
-            font-size: 1rem;
-            display: flex;
-            justify-content: space-between;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #003366;
-        }
-        .details {
-            margin-top: 5px;
-            font-size: 0.95rem;
-        }
-        #download-btn {
-            display: flex;
-            position: center;
-            text-align: center;
-        }
-        button {
+        .btn-download {
             padding: 10px 20px;
-            font-size: 1rem;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            font-size: 16px;
         }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .verso-title {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #ffffff;
-            text-align: center;
-        }
-        .card-title {
-            color: #003366;
-        }
-        .verso-title {
-            color: #003366;
-        }
-        .DM{
-            display: flex;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-top: 50px;
-        }
-        .hide-download {
-            display: none;
-        }
-        /* Estilos padrão para desktops */
-        .container {
-            width: 80%;
-            margin: 0 auto;
-        }
-        
-        /* Estilos para dispositivos móveis */
-        @media (max-width: 768px) {
-            .container {
-                width: 95%;
-            }
-        
-            /* Reduzindo o tamanho dos elementos */
-            .card {
-                padding: 10px;
-            }
-        
-            /* Ajuste de texto */
-            h1 {
-                font-size: 24px;
-            }
-        
-            h2 {
-                font-size: 20px;
-            }
-        }
-        
+    }
 
+    /* Ajustes específicos para smartphones muito pequenos */
+    @media (max-width: 380px) {
+        .card-container {
+            padding: 12px;
+            margin: 5px;
+            min-height: 260px;
+        }
+
+        .card-title, .verso-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .name, .DM {
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+
+        .info, .details {
+            font-size: 0.8rem;
+        }
+
+        .details p {
+            margin: 3px 0;
+        }
+
+        .logo {
+            width: 35px;
+        }
+
+        .qr-code {
+            width: 60px;
+        }
+    }
+
+    .hide-download {
+        display: none;
+    }
     </style>
 </head>
 <body>
-    <!-- Menu lateral estilo Streamlit -->
     <div class="sidebar">
-        <a href="{{ url_for('index') }}">Formulário</a>
-        <a href="{{ url_for('informative') }}">Sobre</a>
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('index') }}">Formulário</a>
+            <a href="{{ url_for('informative') }}">Sobre</a>
+        </nav>
     </div>
 
     <div class="main-content">
@@ -331,13 +317,13 @@
     <script>
         function downloadCard() {
             document.querySelector('.btn-download').classList.add('hide-download');
-            html2canvas(document.querySelector("#card"), { // Captura o contêiner do cartão
-                scale: 2,  // Aumenta a escala do canvas para melhorar a qualidade
-                useCORS: true, // Habilita CORS para carregar imagens de domínios externos
-                backgroundColor: null // Para manter o fundo transparente se necessário
+            html2canvas(document.querySelector("#card"), {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: null
             }).then(canvas => {
                 const a = document.createElement('a');
-                a.href = canvas.toDataURL('image/png', 1.0); // Qualidade máxima
+                a.href = canvas.toDataURL('image/png', 1.0);
                 a.download = 'cartao-medico.png';
                 a.click();
                 document.querySelector('.btn-download').classList.remove('hide-download');

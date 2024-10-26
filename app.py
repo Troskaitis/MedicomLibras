@@ -214,6 +214,25 @@ def card():
         user=current_user  # Passando o usuário atual para o template
     )
     
+# Definir o caminho absoluto para a pasta static
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+app.static_folder = os.path.join(BASE_DIR, 'static')
+
+# Opcional: Função helper para verificar arquivos estáticos
+def verify_static_file(filename):
+    filepath = os.path.join(app.static_folder, filename)
+    if not os.path.exists(filepath):
+        print(f"Arquivo não encontrado: {filepath}")
+        return False
+    return True
+
+@app.before_request
+def check_static_files():
+    # Verificar arquivos críticos no início
+    verify_static_file('logo.png')
+    verify_static_file('background.png')    
+
+
 @app.route('/generate_qrcode')
 @login_required
 def generate_qrcode():

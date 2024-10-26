@@ -10,50 +10,141 @@
             background-image: url("{{ url_for('static', filename='background.png') }}");
             background-size: cover;
             background-position: center;
-            height: 100vh;
+            background-attachment: fixed;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
+        .logo {
+            max-width: 80px;
+            height: auto;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
         .container {
             background: rgba(255, 255, 255, 0.9);
-            padding: 40px;
+            padding: 15px;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 100%;
+            margin: 15px;
         }
-        .logo {
-            position: center;
-            top: 15px;
-            right: 15px;
-            width: 80px;
-            height: auto;
+
+        .form-wrapper {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-control {
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Media Query para tablets e desktop */
+        @media (min-width: 768px) {
+            .container {
+                padding: 30px;
+                max-width: 500px;
+                margin: 20px auto;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .form-control {
+                font-size: 16px;
+            }
+
+            .logo {
+                max-width: 100px;
+            }
+        }
+
+        /* Estilos específicos para smartphones pequenos */
+        @media (max-width: 380px) {
+            .container {
+                padding: 10px;
+                margin: 10px;
+            }
+
+            .form-group {
+                margin-bottom: 8px;
+            }
+
+            .form-control {
+                font-size: 13px;
+                height: auto;
+                padding: 6px;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+            }
+
+            .logo {
+                max-width: 60px;
+            }
+
+            .btn {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+
+        /* Ajustes para mensagens de erro ou sucesso */
+        .alert {
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        /* Ajustes para o link de registro */
+        .register-link {
+            margin-top: 15px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
-        <h1 class="text-center">Login</h1>
-        <br>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <form method="POST" action="/login">
-                    {{ form.hidden_tag() }}
-                    <div class="form-group">
-                        {{ form.username.label(class="form-label") }}
-                        {{ form.username(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.password.label(class="form-label") }}
-                        {{ form.password(class="form-control") }}
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-                </form>
-                <br>
-                <p class="text-center">Não tem conta? <a href="/register">Cadastre-se</a></p>
-            </div>
+        <div class="form-wrapper">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+            <h1>Login</h1>
+            
+            <form method="POST" action="/login">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.username.label(class="form-label") }}
+                    {{ form.username(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class="form-label") }}
+                    {{ form.password(class="form-control") }}
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+            </form>
+            
+            <p class="text-center register-link">
+                Não tem conta? <a href="/register">Cadastre-se</a>
+            </p>
         </div>
     </div>
+
     <!-- VLibras Widget -->
     <div vw class="enabled">
         <div vw-access-button class="active"></div>

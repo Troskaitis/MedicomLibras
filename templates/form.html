@@ -10,149 +10,244 @@
             background-image: url("{{ url_for('static', filename='background.png') }}");
             background-size: cover;
             background-position: center;
-            display: flex;
-            height: auto;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.7);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            max-width: 700px;
-            margin: auto; 
-            max-width: 1000px;
-            width: 100%;
-        }
-
-        .btnbtn-dangerbtn-block {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            padding: 5px 10px;
+            background-attachment: fixed;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            position: relative;
         }
 
         .logo {
-            position: center;
-            top: 15px;
-            right: 15px;
-            width: 80px;
+            max-width: 80px;
             height: auto;
-        }
-
-        .sidebar {
-            height: 100%;
-            width: 240px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #f1f1f1;
-            background-color: rgba(255, 255, 255, 0.75);
-            display: flex;
-            flex-direction: column;
-            padding-top: 20px;
-        }
-
-        .sidebar a {
-            padding: 10px 20px;
-            text-decoration: none;
-            font-size: 18px;
-            color: #333;
-            transition: 0.3s;
+            margin: 0 auto 20px;
             display: block;
         }
 
-        .sidebar a:hover {
-            background-color: #ddd;
+        /* Estilos para dispositivos móveis (padrão) */
+        .sidebar {
+            background-color: rgba(255, 255, 255, 0.75);
+            padding: 10px;
+            width: 100%;
+            position: relative;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .sidebar a {
+            padding: 8px 15px;
+            text-decoration: none;
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            font-size: 14px;
         }
 
         .main-content {
-            margin-left: 260px;
-            padding: 20px;
-            width: calc(100% - 260px);
-            display: flex;
-            justify-content: center;
+            width: 100%;
+            padding: 15px;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .btnbtn-dangerbtn-block {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-control {
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Media Query para tablets e desktop */
+        @media (min-width: 768px) {
+            .sidebar {
+                width: 240px;
+                height: 100vh;
+                position: fixed;
+                left: 0;
+                top: 0;
+                padding: 20px;
+            }
+
+            .sidebar-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .sidebar a {
+                font-size: 16px;
+                margin: 5px 0;
+            }
+
+            .main-content {
+                margin-left: 240px;
+                padding: 20px;
+                width: calc(100% - 240px);
+            }
+
+            .container {
+                padding: 30px;
+                max-width: 900px;
+                margin: 20px auto;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .form-control {
+                font-size: 16px;
+            }
+        }
+
+        /* Estilos específicos para smartphones pequenos */
+        @media (max-width: 380px) {
+            .container {
+                padding: 10px;
+            }
+
+            .form-group {
+                margin-bottom: 8px;
+            }
+
+            .form-control {
+                font-size: 13px;
+                height: auto;
+                padding: 6px;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+            }
+
+            .logo {
+                max-width: 60px;
+            }
+        }
+
+        /* Ajustes para o botão de logout */
+        .logout-button {
+            position: relative;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        /* Ajustes para o formulário */
+        .form-wrapper {
+            max-width: 500px;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
-    
     <div class="sidebar">
-        <a href="{{ url_for('index') }}">Formulário</a>
-        <a href="{{ url_for('informative') }}">Sobre</a>
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('index') }}">Formulário</a>
+            <a href="{{ url_for('informative') }}">Sobre</a>
+        </nav>
     </div>
 
     <div class="main-content">
-        <div class="container mt-5">
+        <div class="container">
+            <div class="logout-button">
+                <form method="POST" action="{{ url_for('logout') }}">
+                    <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+                </form>
+            </div>
+            
             <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
-            <h1 class="text-center">Cadastro de Informações Médicas</h1>
+            <h1>Cadastro de Informações Médicas</h1>
             <p class="text-center">Usuário logado: {{ current_user.username }}</p>
-            <form method="POST" action="{{ url_for('logout') }}">
-                <button type="submit" class="btnbtn-dangerbtn-block">Logout</button>
-            </form>
-            <br>
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <form method="POST" action="/">
-                        {{ form.hidden_tag() }}
-                        <div class="form-group">
-                            {{ form.name.label(class="form-label") }}
-                            {{ form.name(class="form-control") }}
-                        </div>
-                        <div class="form-group">
-                            {{ form.blood_type.label(class="form-label") }}
-                            {{ form.blood_type(class="form-control") }}
-                        </div>
-                        <div class="form-group">
-                            {{ form.birth_date.label(class="form-label") }}
-                            {{ form.birth_date(class="form-control") }}
-                        </div>
-                        <div class="form-group">
-                            {{ form.rg.label(class="form-label") }}
-                            {{ form.rg(class="form-control") }}
-                        </div>
-                        <div class="form-group">
-                            {{ form.cpf.label(class="form-label") }}
-                            {{ form.cpf(class="form-control") }}
-                        </div>
-                        <div class="form-group">
-                            {{ form.sus_number.label(class="form-label") }}
-                            {{ form.sus_number(class="form-control") }}
-                        </div>
-                        <div class="form-group">
-                            {{ form.cid.label(class="form-label") }}
-                            {{ form.cid(class="form-control") }}
-                        </div>
-                        <div class="form-group">
-                            {{ form.medication.label(class="form-label") }}
-                            {{ form.medication(class="form-control") }}
-                        </div>
-                        <div class="form-group">
-                            {{ form.surgery.label(class="form-label") }}
-                            {{ form.surgery(class="form-control") }}
-                        </div>
-                        <div class="form-group">
-                            {{ form.family_diseases.label(class="form-label") }}
-                            {{ form.family_diseases(class="form-control") }}
-                        </div>
-                        <div class="form-group">
-                            {{ form.allergies.label(class="form-label") }}
-                            {{ form.allergies(class="form-control") }}
-                        </div>
-                        <div class="form-group">
-                            {{ form.chronic_disease.label(class="form-label") }}
-                            {{ form.chronic_disease(class="form-control") }}
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-block">Gerar Cartão</button>
-                        {# Botão Acessar Cartão, exibido apenas se os dados médicos existirem #}
+            
+            <div class="form-wrapper">
+                <form method="POST" action="/">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.name.label(class="form-label") }}
+                        {{ form.name(class="form-control") }}
+                    </div>
+                    <!-- Resto dos campos do formulário -->
+                    <div class="form-group">
+                        {{ form.blood_type.label(class="form-label") }}
+                        {{ form.blood_type(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.birth_date.label(class="form-label") }}
+                        {{ form.birth_date(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.rg.label(class="form-label") }}
+                        {{ form.rg(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.cpf.label(class="form-label") }}
+                        {{ form.cpf(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.sus_number.label(class="form-label") }}
+                        {{ form.sus_number(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.cid.label(class="form-label") }}
+                        {{ form.cid(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.medication.label(class="form-label") }}
+                        {{ form.medication(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.surgery.label(class="form-label") }}
+                        {{ form.surgery(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.family_diseases.label(class="form-label") }}
+                        {{ form.family_diseases(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.allergies.label(class="form-label") }}
+                        {{ form.allergies(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.chronic_disease.label(class="form-label") }}
+                        {{ form.chronic_disease(class="form-control") }}
+                    </div>
+                    
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary">Gerar Cartão</button>
                         {% if medical_record_exists %}
                         <a href="{{ url_for('card') }}" class="btn btn-secondary">Acessar Cartão</a>
                         {% endif %}
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

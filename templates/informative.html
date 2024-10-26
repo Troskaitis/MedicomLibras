@@ -10,106 +10,198 @@
             background-image: url("{{ url_for('static', filename='background.png') }}");
             background-size: cover;
             background-position: center;
-            display: flex;
+            background-attachment: fixed;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .logo {
+            max-width: 80px;
             height: auto;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.7);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            max-width: 700px;
-            margin: auto; 
-            max-width: 1000px;
-            width: 100%;
-        }
-        .sidebar {
-            height: 100%;
-            width: 240px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: rgba(255, 255, 255, 0.75);
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            padding-top: 20px;
-        }
-
-        .sidebar a {
-            padding: 10px 20px;
-            text-decoration: none;
-            font-size: 18px;
-            color: #333;
-            transition: 0.3s;
+            margin: 0 auto 20px;
             display: block;
         }
 
-        .sidebar a:hover {
-            background-color: #ddd;
+        /* Estilos para dispositivos móveis (padrão) */
+        .sidebar {
+            background-color: rgba(255, 255, 255, 0.75);
+            padding: 10px;
+            width: 100%;
+            position: relative;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .sidebar a {
+            padding: 8px 15px;
+            text-decoration: none;
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            font-size: 14px;
         }
 
         .main-content {
-            margin-left: 260px;
-            padding: 20px;
-            width: calc(100% - 260px);
-            display: flex;
-            justify-content: center;
+            width: 100%;
+            padding: 15px;
+            margin: 0;
         }
-        .btnbtn-dangerbtn-block {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            padding: 5px 10px;
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
         }
-        .logo {
-            position: center;
-            top: 15px;
-            right: 15px;
-            width: 80px;
+
+        /* Ajustes para textos */
+        h1 {
+            font-size: 1.5rem;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: justify;
+            padding: 0 10px;
+        }
+
+        /* Ajustes para a imagem do cartão */
+        .img-fluid {
+            display: block;
+            margin: 20px auto;
+            max-width: 90%;
             height: auto;
         }
-        .img-fluid {
-            display: block; /* Define a imagem como um bloco */
-            margin: 20px auto; /* Centraliza horizontalmente e ajusta o espaçamento vertical */
-            max-width: 40%; /* Garante que a imagem se ajuste ao contêiner sem ultrapassá-lo */
-            height: auto; /* Mantém a proporção da imagem */
+
+        /* Ajustes para o botão de logout */
+        .logout-button {
+            position: relative;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        /* Media Query para tablets e desktop */
+        @media (min-width: 768px) {
+            .sidebar {
+                width: 240px;
+                height: 100vh;
+                position: fixed;
+                left: 0;
+                top: 0;
+                padding: 20px;
+            }
+
+            .sidebar-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .sidebar a {
+                font-size: 16px;
+                margin: 5px 0;
+            }
+
+            .main-content {
+                margin-left: 240px;
+                padding: 20px;
+                width: calc(100% - 240px);
+            }
+
+            .container {
+                padding: 30px;
+                max-width: 900px;
+                margin: 20px auto;
+            }
+
+            h1 {
+                font-size: 2rem;
+                margin: 25px 0;
+            }
+
+            p {
+                font-size: 16px;
+                padding: 0 20px;
+            }
+
+            .img-fluid {
+                max-width: 50%;
+            }
+        }
+
+        /* Estilos específicos para smartphones pequenos */
+        @media (max-width: 380px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+                margin: 10px 0;
+            }
+
+            p {
+                font-size: 13px;
+                padding: 0 5px;
+            }
+
+            .logo {
+                max-width: 60px;
+            }
+
+            .img-fluid {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    
     <div class="sidebar">
-        <a href="{{ url_for('index') }}">Formulário</a>
-        <a href="{{ url_for('informative') }}">Sobre</a>
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('index') }}">Formulário</a>
+            <a href="{{ url_for('informative') }}">Sobre</a>
+        </nav>
     </div>
 
     <div class="main-content">
-        <div class="container mt-5">
+        <div class="container">
+            <div class="logout-button">
+                <form method="POST" action="{{ url_for('logout') }}">
+                    <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+                </form>
+            </div>
+
             <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
-            <h1 class="text-center">Sobre o Projeto</h1>
-            <br>
-            <p class="text-center">Como parte da grade curricular do eixo de Computação da <a href="https://univesp.br/">UNIVESP</a>, Universidade Virtual do Estado de São Paulo, o desenvolvimento desta plataforma tem como intuito implementar uma solução para um problema real, utilizando linguagens de programação, banco de dados, controle de versão, API e acessibilidade. O projeto foi desenvolvido pelos alunos do 6 semestre do curso de Ciência de Dados.</p>
-            <br>
-            <h1 class="text-center">Problema</h1>
-            <br>
-            <p class="text-center">As dificuldades enfrentadas por pessoas que possuem deficiência auditiva em se comunicar em ambientes de saúde, como UBS, prontos socorros e hospitais em geral, devido as barreiras linguisticas e a falta de acessibilidade e/ou comunicação ineficiente. O objetivo principal é possibilitar que essas pessoas possuam um meio de transimitir com maior facilidade e precisão, suas informações médicas básicas, como por exemplo, alergia a medicamentos, tipagem sanguinea, histórico de cirurgia, se possuem doênças crônicas, dentre outros dados, facilitando o atendimento, triagem, e até mesmo, um atendimento emergencial ao paciente.</p>
-            <br>
-            <h1 class="text-center">Solução</h1>
-            <br>
-            <p class="text-center">A aplicação possui 3 etapas, cadastro na plataforma, preeenchimento do formulário com as informações pessoais, e a geração do cartão virtual contendo estas informações. Como o foco principal é ajudar pessoas que possuem algum tipo de deficiência auditiva, a plataforma possui integração com o conjunto de ferramentas <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/vlibras">Vlibras</a>, responsável por viabilizar a tradução de conteúdos digitais em tempo real. Você pode contribuir para o projeto acessando nosso repositório no <a href="https://github.com/Troskaitis/my_medical_card">GitHub</a>. </p>
-            <br>
+            
+            <h1>Sobre o Projeto</h1>
+            <p>Como parte da grade curricular do eixo de Computação da <a href="https://univesp.br/">UNIVESP</a>, Universidade Virtual do Estado de São Paulo, o desenvolvimento desta plataforma tem como intuito implementar uma solução para um problema real, utilizando linguagens de programação, banco de dados, controle de versão, API e acessibilidade. O projeto foi desenvolvido pelos alunos do 6 semestre do curso de Ciência de Dados.</p>
+            
+            <h1>Problema</h1>
+            <p>As dificuldades enfrentadas por pessoas que possuem deficiência auditiva em se comunicar em ambientes de saúde, como UBS, prontos socorros e hospitais em geral, devido as barreiras linguisticas e a falta de acessibilidade e/ou comunicação ineficiente. O objetivo principal é possibilitar que essas pessoas possuam um meio de transimitir com maior facilidade e precisão, suas informações médicas básicas, como por exemplo, alergia a medicamentos, tipagem sanguinea, histórico de cirurgia, se possuem doênças crônicas, dentre outros dados, facilitando o atendimento, triagem, e até mesmo, um atendimento emergencial ao paciente.</p>
+            
+            <h1>Solução</h1>
+            <p>A aplicação possui 3 etapas, cadastro na plataforma, preeenchimento do formulário com as informações pessoais, e a geração do cartão virtual contendo estas informações. Como o foco principal é ajudar pessoas que possuem algum tipo de deficiência auditiva, a plataforma possui integração com o conjunto de ferramentas <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/vlibras">Vlibras</a>, responsável por viabilizar a tradução de conteúdos digitais em tempo real. Você pode contribuir para o projeto acessando nosso repositório no <a href="https://github.com/Troskaitis/my_medical_card">GitHub</a>.</p>
+            
             <p class="text-center">Cartão gerado pela aplicação</p>
             <img src="{{ url_for('static', filename='cartao-medico.png') }}" alt="Exemplo" class="img-fluid">
-
         </div>
     </div>
-    <form method="POST" action="{{ url_for('logout') }}">
-        <button type="submit" class="btnbtn-dangerbtn-block">Logout</button>
-    </form>
+
     <!-- VLibras Widget -->
     <div vw class="enabled">
         <div vw-access-button class="active"></div>
