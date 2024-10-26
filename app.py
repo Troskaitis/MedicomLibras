@@ -129,7 +129,7 @@ def index():
     existing_record = MedicalRecord.query.filter_by(user_id=current_user.id).first()
     
     # Preenche o formulário com os dados existentes, se houver
-    if existing_record:
+    if existing_record and request.method == 'GET':
         form.name.data = existing_record.name
         form.blood_type.data = existing_record.blood_type
         form.birth_date.data = existing_record.birth_date
@@ -146,7 +146,7 @@ def index():
     # Quando o formulário é enviado
     if form.validate_on_submit():
         if existing_record:
-            # Atualiza o registro existente
+            # Atualiza o registro existente com as novas informações
             existing_record.name = form.name.data
             existing_record.blood_type = form.blood_type.data
             existing_record.birth_date = form.birth_date.data
@@ -178,11 +178,13 @@ def index():
             )
             db.session.add(new_record)
         
+        # Confirma a transação para salvar as alterações
         db.session.commit()
-        flash('Dados médicos salvos com sucesso!', 'success')
+        flash('Dados médicos atualizados com sucesso!', 'success')
         return redirect(url_for('card'))
 
     return render_template('form.html', form=form)
+
 
 # Página do cartão virtual (restrita a usuários logados)
 @app.route('/card')
