@@ -1,8 +1,5 @@
 # Medicom Libras (Cartão Médico Virtual)
 
-## Acesse online:
-
-https://web-production-a5052.up.railway.app/register
 
 ## Descrição
 
