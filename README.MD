@@ -101,16 +101,16 @@ MedicomLibras/
 ## Smartphone
 
 ### Tela de Login
-![Tela de Login](assets/login(iPhone12Pro).png)
+<img src="assets/login(iPhone12Pro).png" alt="Tela de Login" width="300"/>
 
 ### Tela de Cadastro
-![Tela de Cadastro](assets/register(iPhone12Pro).png)
+<img src="assets/register(iPhone12Pro).png" alt="Tela de Cadastro" width="300"/>
 
 ### Tela do Formulário Médico
-![Tela do Formulário Médico](assets/form(iPhone12Pro).png)
+<img src="assets/form(iPhone12Pro).png" alt="Tela do Formulário Médico" width="300"/>
 
 ### Tela Sobre o Projeto
-![Tela Sobre o Projeto](assets/sobre(iPhone12Pro).png)
+<img src="assets/sobre(iPhone12Pro).png" alt="Tela Sobre o Projeto" width="300"/>
 
 ### Cartão Médico Virtual
-![Cartão Médico Virtual](assets/card(iPhone12Pro).png)
+<img src="assets/card(iPhone12Pro).png" alt="Cartão Médico Virtual" width="300"/>
