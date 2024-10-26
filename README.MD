@@ -79,5 +79,32 @@ MedicomLibras/
 └── README.md              # Arquivo README com instruções do projeto
 ```
 
-## Screenshots
+# Screenshots
 
+## Desktop
+
+### Tela de Login
+![Tela de Login](assets/screenshot_login.png)
+
+### Tela de Cadastro
+![Tela de Cadastro](assets/screenshot_register.png)
+
+### Tela do Formulário Médico
+![Tela do Formulário Médico](assets/screenshot_form.png)
+
+### Tela Sobre o Projeto
+![Tela Sobre o Projeto](assets/screenshot_sobre.png)
+
+### Cartão Médico Virtual
+![Cartão Médico Virtual](assets/screenshot_card.png)
+
+## Smartphone
+
+### Tela de Login
+![Tela de Login](assets/login(iPhone 12 Pro).png)
+
+### Tela de Cadastro
+![Tela de Cadastro](assets/register(iPhone 12 Pro).png)
+
+### Tela do Formulário Médico
+![Tela do Formulário Médico](assets/form(iPhone 12 Pro).png)
