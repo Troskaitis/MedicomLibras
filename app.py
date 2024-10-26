@@ -237,7 +237,7 @@ def check_static_files():
 @login_required
 def generate_qrcode():
     # O conteúdo do QR Code pode ser o ID do usuário, ou qualquer dado relevante
-    data = f'User ID: {current_user.id}, Username: {current_user.username}'
+    data = 'https://web-production-a5052.up.railway.app/register'
     
     # Gerar o QR Code
     qr = qrcode.QRCode(
