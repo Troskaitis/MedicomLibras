@@ -229,7 +229,7 @@ def verify_static_file(filename):
 @app.before_request
 def check_static_files():
     # Verificar arquivos críticos no início
-    verify_static_file('logo.png')
+    verify_static_file('Logo.png')
     verify_static_file('background.png')    
 
 
