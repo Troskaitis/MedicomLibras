@@ -314,6 +314,31 @@
                     <p><strong>Alergias:</strong> {{ record.allergies }}</p>
                     <p><strong>Doença Crônica:</strong> {{ record.chronic_disease }}</p>
                 </div>
+
+                <div>
+                    <strong>Remédio Controlado:</strong> {{ record.medication }}<br>
+                    <strong>Histórico de Cirurgias:</strong> {{ record.surgery }}<br>
+                    <strong>Doenças na Família:</strong> {{ record.family_diseases }}<br>
+                    <strong>Alergias:</strong> {{ record.allergies }}<br>
+                    <strong>Doença Crônica:</strong> {{ record.chronic_disease }}<br>
+                
+                    <strong>Esta informação está correta?</strong>
+                    <select id="response" onchange="handleSelect()">
+                        <option value="">Selecione</option>
+                        <option value="sim">Sim</option>
+                        <option value="nao">Não</option>
+                    </select>
+                </div>
+                
+                <script>
+                    function handleSelect() {
+                        const select = document.getElementById('response');
+                        const selectedValue = select.value;
+                        
+                        console.log('Opção selecionada:', selectedValue);
+                    }
+                </script>
+                
                 <!-- Exibir o QR Code -->
                 <div class="qr-code">
                     <img src="{{ url_for('generate_qrcode') }}" alt="QR Code" class="img-fluid">
