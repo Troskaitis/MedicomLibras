@@ -11,6 +11,9 @@ import os
 from io import BytesIO
 from flask import send_file
 from datetime import datetime
+from wtforms import SelectMultipleField, widgets
+from wtforms.validators import Length, ValidationError
+from wtforms import SelectField 
 
 
 app = Flask(__name__)
@@ -50,6 +53,17 @@ class RegisterForm(FlaskForm):
     confirm_password = PasswordField('Confirme a Senha', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Registrar')
 
+def validate_max_selections(form, field):
+    if len(field.data) > 3:
+        raise ValidationError('Selecione no máximo 3 opções')
+    if len(field.data) < 1:
+        raise ValidationError('Selecione pelo menos 1 opção')
+    
+# Classe personalizada para campo de seleção múltipla com checkbox
+class MultiCheckboxField(SelectMultipleField):
+    widget = widgets.ListWidget(prefix_label=False)
+    option_widget = widgets.CheckboxInput()
+    
 # Formulário médico
 class MedicalForm(FlaskForm):
     name = StringField('Nome Completo', validators=[DataRequired()])
@@ -59,11 +73,57 @@ class MedicalForm(FlaskForm):
     cpf = StringField('CPF', validators=[DataRequired()])
     sus_number = StringField('Número do Cartão SUS', validators=[DataRequired()])
     cid = StringField('CID', validators=[DataRequired()])
-    medication = TextAreaField('Toma algum remédio controlado?', validators=[DataRequired()])
-    surgery = TextAreaField('Já passou por cirurgia?', validators=[DataRequired()])
-    family_diseases = TextAreaField('Histórico de doença na família?', validators=[DataRequired()])
-    allergies = TextAreaField('Possui alergia a algum remédio?', validators=[DataRequired()])
-    chronic_disease = TextAreaField('Possui doença crônica?', validators=[DataRequired()])
+    medication = SelectField('Toma algum remédio controlado?',
+        choices=[
+            ('', 'Selecione uma opção'),
+            ('sim', 'Sim'),
+            ('nao', 'Não')
+        ],
+        validators=[DataRequired(message='Por favor, selecione uma opção')]
+    )
+    surgery = SelectField('Já passou por cirurgia?',
+        choices=[
+            ('', 'Selecione uma opção'),
+            ('sim', 'Sim'),
+            ('nao', 'Não')
+        ],
+        validators=[DataRequired(message='Por favor, selecione uma opção')]
+    )
+    family_diseases = SelectField('Histórico de doença na família?',
+        choices=[
+            ('', 'Selecione uma opção'),
+            ('sim', 'Sim'),
+            ('nao', 'Não')
+        ],
+        validators=[DataRequired(message='Por favor, selecione uma opção')]
+    )
+    allergies = MultiCheckboxField('Possui alergia a algum remédio?',
+        choices=[
+            ('penicilina', 'Penicilina'),
+            ('amoxicilina', 'Amoxicilina'),
+            ('ampicilina', 'Ampicilina'),
+            ('cefalexina', 'Cefalexina'),
+            ('ceftriaxona', 'Ceftriaxona'),
+            ('ibuprofeno', 'Ibuprofeno'),
+            ('aspirina', 'Aspirina'),
+            ('naproxeno', 'Naproxeno'),
+            ('diclofenaco', 'Diclofenaco'),
+            ('morfina', 'Morfina'),
+            ('tramadol', 'Tramadol'),
+            ('fenitoina', 'Fenitoína'),
+            ('insulina', 'Insulina'),
+            ('outros', 'Outros')
+        ],
+        validators=[validate_max_selections]  # Substituímos os validators anteriores
+    )
+    chronic_disease = SelectField('Possui doença crônica?',
+        choices=[
+            ('', 'Selecione uma opção'),
+            ('sim', 'Sim'),
+            ('nao', 'Não')
+        ],
+        validators=[DataRequired(message='Por favor, selecione uma opção')]
+    )
     submit = SubmitField('Gerar Cartão')
     
 
@@ -137,14 +197,19 @@ def index():
         form.cpf.data = existing_record.cpf
         form.sus_number.data = existing_record.sus_number
         form.cid.data = existing_record.cid
-        form.medication.data = existing_record.medication
-        form.surgery.data = existing_record.surgery
-        form.family_diseases.data = existing_record.family_diseases
-        form.allergies.data = existing_record.allergies
-        form.chronic_disease.data = existing_record.chronic_disease
+        form.medication.data = existing_record.medication.lower()
+        form.surgery.data = existing_record.surgery.lower()
+        form.family_diseases.data = existing_record.family_diseases.lower()
+        form.allergies.data = existing_record.allergies.split(', ')
+        form.chronic_disease.data = existing_record.chronic_disease.lower()
 
     # Quando o formulário é enviado
     if form.validate_on_submit():
+        selected_allergies = ', '.join(form.allergies.data)
+        # Verificar se não excede 3 seleções
+        if len(form.allergies.data) > 3:
+            flash('Selecione no máximo 3 alergias!', 'danger')
+            return render_template('form.html', form=form)
         if existing_record:
             # Atualiza o registro existente com as novas informações
             existing_record.name = form.name.data
@@ -157,7 +222,7 @@ def index():
             existing_record.medication = form.medication.data
             existing_record.surgery = form.surgery.data
             existing_record.family_diseases = form.family_diseases.data
-            existing_record.allergies = form.allergies.data
+            existing_record.allergies = selected_allergies
             existing_record.chronic_disease = form.chronic_disease.data
         else:
             # Cria um novo registro se nenhum existir
@@ -173,7 +238,7 @@ def index():
                 medication=form.medication.data,
                 surgery=form.surgery.data,
                 family_diseases=form.family_diseases.data,
-                allergies=form.allergies.data,
+                allergies=selected_allergies,
                 chronic_disease=form.chronic_disease.data
             )
             db.session.add(new_record)
