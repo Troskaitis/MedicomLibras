@@ -17,6 +17,15 @@
         padding: 0;
         position: relative;
     }
+    .capture-container {
+        position: fixed;
+        top: -9999px;
+        left: -9999px;
+        width: 650px;
+        background: white;
+        padding: 20px;
+        z-index: -1;
+    }
 
     /* Estilos para dispositivos móveis (padrão) */
     .sidebar {
@@ -53,9 +62,9 @@
         align-items: center;
         overflow-y: auto;
     }
-
+    
     /* Estilos do cartão */
-    #card {
+    #card, #capture-card {
         width: 100%;
         max-width: 100%;
         display: flex;
@@ -258,6 +267,12 @@
     </style>
 </head>
 <body>
+    <!-- Container invisível para captura -->
+    <div class="capture-container">
+        <div id="capture-card">
+            <!-- Clone do conteúdo do cartão aqui -->
+        </div>
+    </div>
     <div class="sidebar">
         <nav class="sidebar-nav">
             <a href="{{ url_for('index') }}">Formulário</a>
@@ -312,23 +327,67 @@
         </div>
     </div>
 
-    <!-- Inclusão da biblioteca html2canvas -->
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
     <script>
-        function downloadCard() {
-            document.querySelector('.btn-download').classList.add('hide-download');
-            html2canvas(document.querySelector("#card"), {
-                scale: 2,
-                useCORS: true,
-                backgroundColor: null
-            }).then(canvas => {
+        async function downloadCard() {
+            const btn = document.querySelector('.btn-download');
+            btn.disabled = true;
+            btn.textContent = 'Gerando...';
+
+            try {
+                // Clone o conteúdo para o container de captura
+                const captureContainer = document.querySelector('.capture-container');
+                const originalCard = document.querySelector("#card");
+                const captureCard = document.querySelector("#capture-card");
+                
+                captureCard.innerHTML = originalCard.innerHTML;
+
+                // Aguarde um momento para garantir que as imagens foram carregadas
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                // Capture a imagem do container fixo
+                const canvas = await html2canvas(captureCard, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: null,
+                    logging: false,
+                    windowWidth: 650,
+                    windowHeight: document.querySelector("#capture-card").offsetHeight
+                });
+
+                // Crie e dispare o download
                 const a = document.createElement('a');
                 a.href = canvas.toDataURL('image/png', 1.0);
                 a.download = 'cartao-medico.png';
                 a.click();
-                document.querySelector('.btn-download').classList.remove('hide-download');
-            });
+            } catch (error) {
+                console.error('Erro ao gerar imagem:', error);
+                alert('Ocorreu um erro ao gerar a imagem. Por favor, tente novamente.');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Download';
+            }
         }
+
+        // Garantir que as imagens estão carregadas antes de permitir o download
+        window.onload = function() {
+            const images = document.querySelectorAll('img');
+            let loadedImages = 0;
+
+            images.forEach(img => {
+                if (img.complete) {
+                    loadedImages++;
+                } else {
+                    img.addEventListener('load', () => {
+                        loadedImages++;
+                        if (loadedImages === images.length) {
+                            document.querySelector('.btn-download').disabled = false;
+                        }
+                    });
+                }
+            });
+        };
     </script>
     
     <!-- VLibras Widget -->
