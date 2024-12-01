@@ -316,6 +316,28 @@
                     <p><strong>Alergias:</strong> {{ record.allergies }}</p>
                     <p><strong>Doença Crônica:</strong> {{ record.chronic_disease }}</p>
                 </div>
+                <strong>Esta informação está correta?</strong>
+    <div class="option-bar">
+        <div class="option-button" onclick="selectOption('sim')">Sim</div>
+        <div class="option-button" onclick="selectOption('nao')">Não</div>
+    </div>
+</div>
+
+<script>
+    function selectOption(option) {
+        const buttons = document.querySelectorAll('.option-button');
+        buttons.forEach(button => {
+            button.classList.remove('selected');
+        });
+        
+        const selectedButton = Array.from(buttons).find(button => button.textContent === option.charAt(0).toUpperCase() + option.slice(1));
+        if (selectedButton) {
+            selectedButton.classList.add('selected');
+        }
+        
+        console.log('Opção selecionada:', option);
+    }
+</script>
                 <!-- Exibir o QR Code -->
                 <div class="qr-code">
                     <img src="{{ url_for('generate_qrcode') }}" alt="QR Code" class="img-fluid">
