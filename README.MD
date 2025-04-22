@@ -34,10 +34,6 @@ cd MedicomLibras
 flask run
 ```
 
-### Acesse a aplicação no navegador:
-
-http://127.0.0.1:5000/
-
 
 ## Pré-requisitos
 
