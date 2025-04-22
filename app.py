@@ -312,7 +312,8 @@ def generate_qrcode():
         # Formatar a data de nascimento
         birth_date_formatted = record.birth_date.strftime('%d/%m/%Y')
         
-        # Criar string com informações essenciais
+        # Criar string com informações
+        
         data = (
             f"CARTÃO MÉDICO VIRTUAL\n\n"
             f"Nome: {record.name}\n"
